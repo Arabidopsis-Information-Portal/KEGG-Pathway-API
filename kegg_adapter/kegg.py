@@ -16,9 +16,9 @@ import json
 
 def search(args):
     if not 'operation' in args.keys():
-        exit(1);
+        exit(0);
     if not 'argument' in args.keys():
-        exit(1);
+        exit(0);
 
     url = 'http://rest.kegg.jp/'
     operation = args['operation']
@@ -37,7 +37,6 @@ def search(args):
 
     if operation == 'find' or operation == 'list'\
             or operation == 'link' or operation == 'conv':
-        print "jsonizing"
         lines = html.split('\n')
         for line in lines:     
             parts = line.split('\t');
