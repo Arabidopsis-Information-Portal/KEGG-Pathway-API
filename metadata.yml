@@ -1,0 +1,8 @@
+
+---
+name: kegg_adapter
+version: 0.1
+type: query
+main_module: kegg_adapter/kegg.py
+url: http://example.com
+description: 'Webservice using kegg webservice returning info as JSON'
