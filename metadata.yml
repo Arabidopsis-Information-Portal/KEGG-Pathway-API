@@ -4,5 +4,6 @@ name: kegg_adapter
 version: 0.1
 type: query
 main_module: kegg_adapter/kegg.py
-url: http://example.com
+url: rest.kegg.jp
+whitelist: rest.kegg.jp
 description: 'Webservice using kegg webservice returning info as JSON'
