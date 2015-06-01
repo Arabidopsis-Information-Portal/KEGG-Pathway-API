@@ -5,5 +5,6 @@ version: 0.1
 type: query
 main_module: pathway/pathway.py
 url: rest.kegg.jp
-whitelist: rest.kegg.jp
+whitelist:
+  - rest.kegg.jp
 description: 'Finds the pathways involved with the given AT locus ID using KEGG'
