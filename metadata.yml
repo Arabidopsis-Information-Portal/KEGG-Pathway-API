@@ -1,9 +1,9 @@
 
 ---
-name: kegg_adapter
+name: pathways
 version: 0.1
 type: query
-main_module: kegg_adapter/kegg.py
+main_module: kegg_adapter/pathway.py
 url: rest.kegg.jp
 whitelist: rest.kegg.jp
-description: 'Webservice using kegg webservice returning info as JSON'
+description: 'Finds the pathways involved with the given AT locus ID using KEGG'
