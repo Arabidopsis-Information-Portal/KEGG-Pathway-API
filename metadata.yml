@@ -5,6 +5,27 @@ version: 0.1
 type: query
 main_module: pathway/kegg.py
 url: http://rest.kegg.jp
-description: 'Finds the pathways involved with the given AT locus ID using KEGG'
+description: 'Provides access to the KEGG REST API and returns information in JSON form''
 whitelist:
   - rest.kegg.jp
+
+endpoints:
+  /search:
+    description: 'Provides access to KEGG REST API using the same format found at http://www.kegg.jp/kegg/rest/keggapi.html. Only currently works for list, find, and get operations.''
+    parameters:
+      - name: operation
+        description:
+        type: string
+        required: true
+      - name: argument
+        description:
+        type: string
+        required: true
+      - name: argument2
+        description:
+        type: string
+        required: false
+      - name: option
+        description:
+        type: string
+        required: false
