@@ -46,6 +46,15 @@ def search(args):
 
     result = {}
     result['results'] = data
-    result['args'] = args
+    arguments = {}
+    arguments['operation'] = operation
+    arguments['argument'] = argument
+    if 'argument2' in args.keys():
+        arguments['arguments2'] = args['argument2']
+
+    if 'option' in args.keys():
+        arguments['option'] = args['option']
+
+    result['args'] = arguments
 
     print json.dumps(result);
