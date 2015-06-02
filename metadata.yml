@@ -11,7 +11,7 @@ whitelist:
 
 endpoints:
   /search:
-    description: 'Provides access to KEGG REST API using the same format found at http://www.kegg.jp/kegg/rest/keggapi.html. Only currently works for list, find, and get operations.''
+    description: 'Provides access to list, find, and get operations of the KEGG REST API using the same format found at http://www.kegg.jp/kegg/rest/keggapi.html'
     parameters:
       - name: operation
         description:
