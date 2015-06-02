@@ -3,7 +3,7 @@
 name: pathways
 version: 0.1
 type: query
-main_module: pathway.py
+main_module: pathway/kegg.py
 url: http://rest.kegg.jp
 description: 'Finds the pathways involved with the given AT locus ID using KEGG'
 whitelist:
