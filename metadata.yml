@@ -1,6 +1,6 @@
 
 ---
-name: pathways
+name: kegg_adapter
 version: 0.1
 type: query
 main_module: pathway/kegg.py
