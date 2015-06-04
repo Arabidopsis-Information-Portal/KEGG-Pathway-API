@@ -8,23 +8,26 @@ url: http://rest.kegg.jp
 description: 'Provides access to the KEGG REST API and returns information in JSON form'
 whitelist:
   - rest.kegg.jp
-
+validate_request: yes
 endpoints:
   /search:
-    description: 'Provides access to list, find, and get operations of the KEGG REST API using the same format found at http://www.kegg.jp/kegg/rest/keggapi.html'
+    description: 'Provides access to the KEGG REST API using the same format found at http://www.kegg.jp/kegg/rest/keggapi.html'
     parameters:
       - name: operation
         description:
         type: string
         required: true
+	default: list
       - name: argument
         description:
         type: string
         required: true
+	default: pathway
       - name: argument2
         description:
         type: string
         required: false
+	default: ath
       - name: option
         description:
         type: string

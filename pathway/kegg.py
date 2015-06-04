@@ -22,15 +22,15 @@ def search(args):
 
     if 'argument2' in args.keys():
         url+= '/' + args['argument2']
-        if 'option' in args.keys():
-            url+= '/' + args['option']
+    if 'option' in args.keys():
+        url+= '/' + args['option']
     
     # Gets the text from the url
     response = urllib2.urlopen(url)
     text = response.read()
     data = {}
 
-    # This program only supports the find, list, link, and conv operations as
+    # This part handles the find, list, link, and conv operations as
     # detailed by the KEGG API. 
     if operation == vars.find or operation == vars.list\
             or operation == vars.link or operation == vars.conv:
@@ -66,7 +66,8 @@ def search(args):
                 # creates a new array of lines under that category
                 data[category] = []
                 # Second part is the rest of the line, going under the category
-                data[category].append(parts[1])
+                if len(parts) > 1:
+                    data[category].append(parts[1])
 
 
     
