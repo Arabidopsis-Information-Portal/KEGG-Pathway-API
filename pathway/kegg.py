@@ -1,60 +1,75 @@
 import urllib2
 import json
+import vars
 
-#response = urllib2.urlopen('http://rest.kegg.jp/list/pathway/ath')
-#html = response.read()
-#lines = html.split('\n');
-#data = {};
 
-#for line in lines:
-#    parts = line.split('\t');
-#    if len(parts) >= 2:
-#        data[parts[0]] = parts[1]
-
-#json_data = json.dumps(data)
-#print json_data
 
 def search(args):
+    # Checks the provided int for the required arguments 'operation' and 
+    # 'argument'
     if not 'operation' in args.keys():
-        exit(0);
+        exit(1);
     if not 'argument' in args.keys():
-        exit(0);
+        exit(1);
 
-    url = 'http://rest.kegg.jp/'
+    # Builds the url
+    url = vars.url
     operation = args['operation']
     argument = args['argument']
     url+= operation + '/' + argument
 
+    # adds the optional arguments if they exist
+
     if 'argument2' in args.keys():
         url+= '/' + args['argument2']
+        if 'option' in args.keys():
+            url+= '/' + args['option']
     
-    if 'option' in args.keys():
-        url+= '/' + args['option']
-    
+    # Gets the text from the url
     response = urllib2.urlopen(url)
-    html = response.read()
+    text = response.read()
     data = {}
 
-    if operation == 'find' or operation == 'list'\
-            or operation == 'link' or operation == 'conv':
-        lines = html.split('\n')
+    # This program only supports the find, list, link, and conv operations as
+    # detailed by the KEGG API. 
+    if operation == vars.find or operation == vars.list\
+            or operation == vars.link or operation == vars.conv:
+        # Splits the received text into an array of lines
+        lines = text.split('\n')
         for line in lines:     
-            parts = line.split('\t');
-            if len(parts) >= 2:
+            # splits each line into two parts by the tab delimiter with the
+            # first part being the key and the second part being the value
+            # in the returned JSON
+            parts = line.split(vars.delimiter, 1);
+            if len(parts) == 2:
                 data[parts[0]] = parts[1]
+
+    # Parses results from the get operation
+    elif operation == vars.get:
+        # splits the text into lines
+        lines = text.split('\n')
+        
+        for line in lines:
+            # ignores new lines and the /// that separates the results from the different queries
+            if line == '' or line == '///':
+                continue
+            # If the line is not defining a new category
+            if line[0] == ' ':
+                # Adds the line to the existing category after removing leading and trailing whitespace
+                data[category].append(line.strip())
+            # If the line is defining a new category
+            else:
+                # splits the line into two parts by whitespace
+                parts = line.split(None, 1)
+                # first part is the name of the category
+                category = parts[0]
+                # creates a new array of lines under that category
+                data[category] = []
+                # Second part is the rest of the line, going under the category
+                data[category].append(parts[1])
+
+
     
-
-    result = {}
-    result['results'] = data
-    arguments = {}
-    arguments['operation'] = operation
-    arguments['argument'] = argument
-    if 'argument2' in args.keys():
-        arguments['arguments2'] = args['argument2']
-
-    if 'option' in args.keys():
-        arguments['option'] = args['option']
-
-    result['args'] = arguments
-
-    print json.dumps(result);
+    # Prints the JSON to standard out for ADAMA to convert into a JSON to 
+    # return.
+    print json.dumps(data);
