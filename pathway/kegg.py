@@ -20,9 +20,9 @@ def search(args):
 
     # adds the optional arguments if they exist
 
-    if 'argument2' in args.keys() and args['argument2'] is not None:
+    if 'argument2' in args.keys() and args['argument2'] != 'None':
         url+= '/' + args['argument2']
-    if 'option' in args.keys() and args['option'] is not None:
+    if 'option' in args.keys() and args['option'] != 'None':
         url+= '/' + args['option']
         
     # Gets the text from the url
