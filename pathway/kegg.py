@@ -24,7 +24,7 @@ def search(args):
         url+= '/' + args['argument2']
     if 'option' in args.keys():
         url+= '/' + args['option']
-    
+        
     # Gets the text from the url
     response = urllib2.urlopen(url)
     text = response.read()
