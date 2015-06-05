@@ -17,12 +17,10 @@ endpoints:
         description:
         type: string
         required: true
-        default: list
       - name: argument
         description:
         type: string
         required: true
-        default: ath
       - name: argument2
         description:
         type: string
