@@ -1,7 +1,7 @@
 import urllib2
 import json
 import vars
-
+import requests
 
 
 def search(args):
