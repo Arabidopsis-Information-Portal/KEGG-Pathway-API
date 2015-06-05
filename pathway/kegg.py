@@ -13,7 +13,8 @@ def search(args):
         exit(1);
 
     # Builds the url
-    url = vars.url
+    # url = vars.url
+    url = 'http://rest.kegg.jp/'
     operation = args['operation']
     argument = args['argument']
     url+= operation + '/' + argument
