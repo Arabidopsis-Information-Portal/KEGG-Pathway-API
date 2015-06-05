@@ -17,17 +17,16 @@ endpoints:
         description:
         type: string
         required: true
-	default: list
+        default: list
       - name: argument
         description:
         type: string
         required: true
-	default: pathway
+        default: ath
       - name: argument2
         description:
         type: string
         required: false
-	default: ath
       - name: option
         description:
         type: string
