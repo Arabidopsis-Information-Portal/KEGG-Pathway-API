@@ -29,11 +29,11 @@ def search(args):
     text = r.text;
 
     # Gets the text from the url
-    try:
-        response = urllib2.urlopen(url)
-        text = response.read()
-    except Exception:
-        raise ValueError("Bad URL: " + url)
+ #   try:
+#        response = urllib2.urlopen(url)
+ #       text = response.read()
+  #  except Exception:
+   #     raise ValueError("Bad URL: " + url)
     data = {}
 
     # This part handles the find, list, link, and conv operations as
