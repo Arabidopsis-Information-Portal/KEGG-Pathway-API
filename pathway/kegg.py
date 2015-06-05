@@ -13,17 +13,16 @@ def search(args):
         exit(1);
 
     # Builds the url
-    # url = vars.url
-    url = 'http://rest.kegg.jp/'
+    url = vars.url
     operation = args['operation']
     argument = args['argument']
     url+= operation + '/' + argument
 
     # adds the optional arguments if they exist
 
-    if 'argument2' in args.keys():
+    if 'argument2' in args.keys() and args['argument2'] is not None:
         url+= '/' + args['argument2']
-    if 'option' in args.keys():
+    if 'option' in args.keys() and args['option'] is not None:
         url+= '/' + args['option']
         
     # Gets the text from the url
