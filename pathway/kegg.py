@@ -24,7 +24,10 @@ def search(args):
         url+= '/' + args['argument2']
     if 'option' in args.keys() and args['option'] != 'None':
         url+= '/' + args['option']
-        
+
+    r = requests.get(url);
+    text = r.text;
+
     # Gets the text from the url
     try:
         response = urllib2.urlopen(url)
