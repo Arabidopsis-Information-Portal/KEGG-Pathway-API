@@ -25,15 +25,14 @@ def search(args):
     if 'option' in args.keys() and args['option'] != 'None':
         url+= '/' + args['option']
 
+
+    # Gets text from URL
     r = requests.get(url);
+    
+    if r.status_code != 200:
+        raise ValueError("Bad URL: " + url)
     text = r.text;
 
-    # Gets the text from the url
- #   try:
-#        response = urllib2.urlopen(url)
- #       text = response.read()
-  #  except Exception:
-   #     raise ValueError("Bad URL: " + url)
     data = {}
 
     # This part handles the find, list, link, and conv operations as
