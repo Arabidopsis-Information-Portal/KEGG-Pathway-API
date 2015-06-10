@@ -1,6 +1,6 @@
 import urllib2
 import json
-import vars
+import services.common.vars as vars
 import requests
 
 
