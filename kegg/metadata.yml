@@ -3,7 +3,7 @@
 name: kegg_adapter
 version: 0.1
 type: query
-main_module: pathway/kegg.py
+main_module: kegg/kegg.py
 url: http://rest.kegg.jp
 description: 'Provides access to the KEGG REST API and returns information in JSON form'
 whitelist:
