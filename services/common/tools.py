@@ -1,4 +1,5 @@
 import services.common.vars as vars
+import requests
 
 def two_col(text):
     data = {}
@@ -19,7 +20,9 @@ def find_cat(text, cat):
     flag = False;
     data = []
     for line in lines:
+        print line
         parts = line.split(None, 1)
+
         if parts[0] == cat and not flag:
             data.append(parts[1])
             flag = True
@@ -29,3 +32,9 @@ def find_cat(text, cat):
             data.append(line.strip())
     return data
         
+def openurl(url):
+    r = requests.get(url)
+    if r.status_code != 200:
+        raise Exception("Can't access url" + url)
+    return r.text
+    
