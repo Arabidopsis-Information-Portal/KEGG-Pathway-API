@@ -1,6 +1,6 @@
 import requests
 import json
-import vars
+import services.common.vars
 
 def search(args):
     if 'identifier' in args.keys():
