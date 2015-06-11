@@ -26,7 +26,8 @@ def search(args):
             # in the returned JSON
             parts = line.split(vars.delimiter, 1);
             if len(parts) == 2:
-                data[parts[0]] = parts[1]
+                data['id'] = parts[0]
+                data['name'] = parts[1]
 
         
     print json.dumps(data)
