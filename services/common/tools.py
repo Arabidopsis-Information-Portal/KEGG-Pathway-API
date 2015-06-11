@@ -20,7 +20,6 @@ def find_cat(text, cat):
     flag = False;
     data = []
     for line in lines:
-        print line
         parts = line.split(None, 1)
 
         if parts[0] == cat and not flag:

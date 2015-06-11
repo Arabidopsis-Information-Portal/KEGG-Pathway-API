@@ -9,7 +9,16 @@ def search(args):
         if 'field' in args.keys():
             url = vars.url + 'get/' + args['identifier']
             text = tools.openurl(url)
-            data = tools.find_cat(text, args['field'])
+            arr = tools.find_cat(text, args['field'])
+
+            if args['field'].upper() == "GENE":
+                data = []
+                for line in arr:
+                    parts = line.split(None, 1)
+                    gene = {'id':parts[0], 'name':parts[1]}
+                    data.append(gene)
+            else:
+                data = arr
         else:
             url = vars.url + 'list/' + args['identifier']
             text = tools.openurl(url)
