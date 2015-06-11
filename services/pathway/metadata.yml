@@ -2,7 +2,7 @@
 ---
 name: pathway
 description: KEGG Pathways
-version 0.1
+version: 0.1
 type: query
 main_module: services.pathway.main.py
 url: http://reast.kegg.jp
