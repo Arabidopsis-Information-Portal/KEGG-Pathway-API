@@ -9,3 +9,15 @@ url: http://rest.kegg.jp
 whitelist:
   - rest.kegg.jp
 
+endpoints:
+  /search:
+    description: 'Provides information about Arabidopsis pathways from KEGG'
+    parameters:
+      - name: identifier
+        description: KEGG id of a pathway
+        type: string
+        required: false
+      - name: field
+        description: Get field of a specified pathway
+        type: string
+        required: false
