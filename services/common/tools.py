@@ -1,3 +1,5 @@
+import services.common.vars as vars
+
 def two_col(text):
     data = {}
     lines = text.split('\n')
