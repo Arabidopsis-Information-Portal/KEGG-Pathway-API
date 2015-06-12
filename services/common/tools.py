@@ -4,7 +4,7 @@ import requests
 def two_col(text):
     data = {}
     lines = text.split('\n')
-    for line in lines:     
+    for line in lines:
         # splits each line into two parts by the tab delimiter with the
         # first part being the key and the second part being the value
         # in the returned JSON
@@ -30,10 +30,18 @@ def find_cat(text, cat):
         elif flag:
             data.append(line.strip())
     return data
-        
+
 def openurl(url):
     r = requests.get(url)
     if r.status_code != 200:
-        raise Exception("Can't access url" + url)
+        raise Exception("Can't access url " + url)
     return r.text
-    
+
+def is_pathway(id):
+    text = openurl(vars.url+"list/pathway/ath")
+    lines = text.split('\n')
+    for line in lines:
+        parts = line.split(vars.delimiter, 1);
+        if parts[0][5:] == id:
+            return True
+    return False

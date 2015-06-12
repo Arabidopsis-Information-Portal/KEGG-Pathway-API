@@ -6,6 +6,8 @@ import services.common.tools as tools
 def search(args):
     data = {}
     if 'identifier' in args.keys():
+        if not tools.is_pathway(args['identifier']):
+            raise Exception('Not a valid identifier')
         if 'field' in args.keys():
             url = vars.url + 'get/' + args['identifier']
             text = tools.openurl(url)
