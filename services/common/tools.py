@@ -1,4 +1,5 @@
 import services.common.vars as vars
+import services.common.parser as parser
 import requests
 
 
@@ -21,12 +22,15 @@ def two_col(text, str1, str2):
 
 def find_cat(text, cat):
     cat = cat.upper()
+    if cat not in vars.fields:
+        raise Exception("Not a valid field")
     lines = text.split('\n')
     flag = False;
     data = []
     for line in lines:
         parts = line.split(None, 1)
-
+        if len(parts) == 0:
+            return {}
         if parts[0] == cat and not flag:
             data.append(parts[1])
             flag = True
@@ -34,7 +38,7 @@ def find_cat(text, cat):
             break
         elif flag:
             data.append(line.strip())
-    return data
+    return parser.parse(data, cat)
 
 def openurl(url):
     r = requests.get(url)
