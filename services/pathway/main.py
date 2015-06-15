@@ -24,12 +24,12 @@ def search(args):
         else:
             url = vars.url + 'list/' + args['identifier']
             text = tools.openurl(url)
-            data = tools.two_col(text)
+            data = tools.two_col(text, 'id', 'name')
         
     else:
         url = vars.url + 'list/pathway/ath'
         text = tools.openurl(url)
-        data = tools.two_col(text)
+        data = tools.two_col(text, 'id', 'name')
                
 
         

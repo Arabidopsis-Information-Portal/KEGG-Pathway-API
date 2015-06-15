@@ -1,8 +1,10 @@
 import services.common.vars as vars
 import requests
 
-def two_col(text):
-    data = {}
+
+# Splits text first by line, and then by 
+def two_col(text, str1, str2):
+    data = []
     lines = text.split('\n')
     for line in lines:
         # splits each line into two parts by the tab delimiter with the
@@ -10,7 +12,10 @@ def two_col(text):
         # in the returned JSON
         parts = line.split(vars.delimiter, 1);
         if len(parts) == 2:
-            data[parts[0]] = parts[1]
+            element = {}
+            element[str1] = parts[0]
+            element[str2] = parts[1]
+            data.append(element)
     return data
 
 
