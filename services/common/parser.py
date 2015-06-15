@@ -10,7 +10,6 @@ def parse(data, field):
     if field in {"GENE", "COMPOUND", "MODULE", "DISEASE", "DRUG"}:
         arr = []
         for line in data:
-            print line
             parts = line.split(None, 1)
             gene = {'id':parts[0], field.lower():parts[1]}
             arr.append(gene)
