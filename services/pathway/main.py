@@ -6,34 +6,47 @@ import services.common.tools as tools
 def search(args):
     data = {}
     # If a specific pathway is given
+
     if 'identifier' in args.keys():
-        # If the pathway given is nto actually a pathway, raise an exception
-        if not tools.is_pathway(args['identifier']):
-            raise Exception('Not a valid identifier')
+        org = 'map'
+        if 'organism' in args.keys():
+            org = args['organism']
+        # If the pathway given is not actually a pathway, raise an exception
+        if not tools.valid_pathway_id(args['identifier']):
+            raise Exception('Not a valid identifier')        
+        id = org + args['identifier']
+
         # If a field of the specific pathway is requested
         if 'field' in args.keys():
-            url = vars.url + 'get/' + args['identifier']
+            url = vars.url + 'get/' + id
             text = tools.openurl(url)
             arr = tools.find_cat(text, args['field'])
 
-#            if args['field'].upper() == "GENE":
-#                data = []
-#                for line in arr:
-#                    parts = line.split(None, 1)
-#                    gene = {'id':parts[0], 'name':parts[1]}
-#                    data.append(gene)
-#            else:
             data = arr
         # No field is specified
         else:
-            url = vars.url + 'list/' + args['identifier']
+            url = vars.url + 'list/' + id
             text = tools.openurl(url)
-            data = tools.two_col(text, 'id', 'name')
-    # No pathway is specifie. Lists all pathways in Arabidopsis
-    else:
-        url = vars.url + 'list/pathway/ath'
+            data = tools.two_col_path(text, org if org != 'map' else '')
+    elif 'term' in args.keys():
+        term = args['term']
+        org = ''
+        if 'organism' in args.keys():
+            org = args['organism']
+
+        url = vars.url + 'find/pathway/' + term
         text = tools.openurl(url)
-        data = tools.two_col(text, 'id', 'name')
+        data = tools.two_col_path(text, org)
+
+    # No pathway is specified. Lists all pathways in Arabidopsis
+    else:
+        org = ''
+        if 'organism' in args.keys():
+                org = args['organism']
+                
+        url = vars.url + 'list/pathway/' + org
+        text = tools.openurl(url)
+        data = tools.two_col_path(text, org)
                
 
     print json.dumps(data)
