@@ -17,6 +17,14 @@ endpoints:
         description: KEGG id of a pathway
         type: string
         required: false
+      - name: organism
+        description: The 3 letter KEGG organism code to specify which the organism for the pathways
+        type: string
+        required: false
+      - name: term
+        description: A search term to search the pathways with
+        type: string
+        required: false
       - name: field
         description: Get field of a specified pathway
         type: string
