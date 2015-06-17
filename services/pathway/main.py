@@ -8,8 +8,8 @@ def search(args):
     # If a specific pathway is given
     if 'taxon_id' in args.keys():
         orgcode = tools.taxon_to_kegg(args['taxon_id'])
-        if orgcode is None
-        raise Exception("Not a valid taxon id")
+        if orgcode is None:
+            raise Exception("Not a valid taxon id")
     if 'identifier' in args.keys():
         org = 'map'
         if 'taxon_id' in args.keys():
