@@ -30,13 +30,31 @@ def search(args):
             data = tools.two_col_path(text, org if org != 'map' else '')
     elif 'term' in args.keys():
         term = args['term']
-        org = ''
-        if 'organism' in args.keys():
+        if 'organism' not in args.keys():
+            url = vars.url + 'find/pathway/' + term
+            text = tools.openurl(url)
+            data = tools.two_col_path(text, '')
+        else:
             org = args['organism']
+            url = vars.url + 'find/pathway/' + term
+            text = tools.openurl(url)
+            tempdata = tools.two_col_path(text, '')
+            url2 = vars.url + 'list/pathway/' + org
+            text2 = tools.openurl(url2)
+            data2 = []
+            lines = text2.split('\n')
+            for line in lines:
+                parts = line.split(vars.delimiter, 1);
+                if len(parts) == 2:
+                    data2.append(parts[0][8:])
 
-        url = vars.url + 'find/pathway/' + term
-        text = tools.openurl(url)
-        data = tools.two_col_path(text, org)
+            data = []
+            for element in tempdata:
+                if element['KEGG_pathway_id'] in data2:
+                    data.append(element)
+                        
+
+
 
     # No pathway is specified. Lists all pathways in Arabidopsis
     else:
