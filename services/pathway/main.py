@@ -6,8 +6,10 @@ import services.common.tools as tools
 def search(args):
     data = {}
     # If a specific pathway is given
+    tid = ''
     if 'taxon_id' in args.keys():
-        orgcode = tools.taxon_to_kegg(args['taxon_id'])
+        tid = args['taxon_id']
+        orgcode = tools.taxon_to_kegg(tid)
         if orgcode is None:
             raise Exception("Not a valid taxon id")
     if 'identifier' in args.keys():
@@ -30,7 +32,7 @@ def search(args):
         else:
             url = vars.url + 'list/' + id
             text = tools.openurl(url)
-            data = tools.two_col_path(text, org if org != 'map' else '')
+            data = tools.two_col_path(text, tid)
     elif 'term' in args.keys():
         term = args['term']
         if 'taxon_id' not in args.keys():
@@ -41,7 +43,7 @@ def search(args):
             org = orgcode
             url = vars.url + 'find/pathway/' + term
             text = tools.openurl(url)
-            tempdata = tools.two_col_path(text, '')
+            tempdata = tools.two_col_path(text, tid)
             url2 = vars.url + 'list/pathway/' + org
             text2 = tools.openurl(url2)
             data2 = []
@@ -67,7 +69,7 @@ def search(args):
                 
         url = vars.url + 'list/pathway/' + org
         text = tools.openurl(url)
-        data = tools.two_col_path(text, org)
+        data = tools.two_col_path(text, tid)
                
 
     print json.dumps(data)

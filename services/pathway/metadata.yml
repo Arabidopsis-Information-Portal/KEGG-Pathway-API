@@ -25,7 +25,3 @@ endpoints:
         description: A search term to search the pathways with
         type: string
         required: false
-      - name: field
-        description: Get field of a specified pathway
-        type: string
-        required: false
