@@ -83,3 +83,20 @@ def is_pathway(id):
         if parts[0][5:] == id:
             return True
     return False
+
+def taxon_to_kegg(id):
+    url = vars.url+"list/genome"
+    text = openurl(url)
+    
+    lines = text.split('\n')
+    for line in lines:
+        parts1 = line.split(';')
+        parts = parts1[0].split(None, 3);
+        if len(parts1) == 2 and len(parts) >= 3:
+            if parts[-1] == id:
+                return parts[1][:-1]
+    return None
+
+
+
+

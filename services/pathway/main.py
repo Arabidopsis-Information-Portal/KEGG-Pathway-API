@@ -6,11 +6,13 @@ import services.common.tools as tools
 def search(args):
     data = {}
     # If a specific pathway is given
+    if 'organism' in args.keys():
+        orgcode = tools.taxon_to_kegg(args['organism'])
 
     if 'identifier' in args.keys():
         org = 'map'
         if 'organism' in args.keys():
-            org = args['organism']
+            org = orgcode
         # If the pathway given is not actually a pathway, raise an exception
         if not tools.valid_pathway_id(args['identifier']):
             raise Exception('Not a valid identifier')        
@@ -35,7 +37,7 @@ def search(args):
             text = tools.openurl(url)
             data = tools.two_col_path(text, '')
         else:
-            org = args['organism']
+            org = orgcode
             url = vars.url + 'find/pathway/' + term
             text = tools.openurl(url)
             tempdata = tools.two_col_path(text, '')
@@ -60,7 +62,7 @@ def search(args):
     else:
         org = ''
         if 'organism' in args.keys():
-                org = args['organism']
+                org = orgcode
                 
         url = vars.url + 'list/pathway/' + org
         text = tools.openurl(url)
