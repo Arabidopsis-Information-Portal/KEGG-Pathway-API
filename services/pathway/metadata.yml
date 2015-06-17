@@ -17,8 +17,8 @@ endpoints:
         description: KEGG id of a pathway
         type: string
         required: false
-      - name: organism
-        description: The 3 letter KEGG organism code to specify which the organism for the pathways
+      - name: taxon_id
+        description: The NCBI id of the species to search for pathways in
         type: string
         required: false
       - name: term

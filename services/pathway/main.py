@@ -6,12 +6,13 @@ import services.common.tools as tools
 def search(args):
     data = {}
     # If a specific pathway is given
-    if 'organism' in args.keys():
-        orgcode = tools.taxon_to_kegg(args['organism'])
-
+    if 'taxon_id' in args.keys():
+        orgcode = tools.taxon_to_kegg(args['taxon_id'])
+        if orgcode is None
+        raise Exception("Not a valid taxon id")
     if 'identifier' in args.keys():
         org = 'map'
-        if 'organism' in args.keys():
+        if 'taxon_id' in args.keys():
             org = orgcode
         # If the pathway given is not actually a pathway, raise an exception
         if not tools.valid_pathway_id(args['identifier']):
@@ -32,7 +33,7 @@ def search(args):
             data = tools.two_col_path(text, org if org != 'map' else '')
     elif 'term' in args.keys():
         term = args['term']
-        if 'organism' not in args.keys():
+        if 'taxon_id' not in args.keys():
             url = vars.url + 'find/pathway/' + term
             text = tools.openurl(url)
             data = tools.two_col_path(text, '')
@@ -61,7 +62,7 @@ def search(args):
     # No pathway is specified. Lists all pathways in Arabidopsis
     else:
         org = ''
-        if 'organism' in args.keys():
+        if 'taxon_id' in args.keys():
                 org = orgcode
                 
         url = vars.url + 'list/pathway/' + org
