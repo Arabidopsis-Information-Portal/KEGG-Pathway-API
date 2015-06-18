@@ -1,6 +1,7 @@
 import services.common.vars as vars
 import services.common.parser as parser
 import requests
+import time
 import re
 
 # Splits text first by line, and then by 
@@ -25,9 +26,10 @@ def two_col_path(text, org):
     data = []
     lines = text.split('\n')
     for line in lines:
-        # splits each line into two parts by the tab delimiter with the                                                              
-        # first part being the key and the second part being the value                                                               
-        # in the returned JSON                                                                                                       
+        # splits each line into two parts by the tab delimiter with the
+        # first part being the key and the second part being the value
+        # in the returned JSON
+
         parts = line.split(vars.delimiter, 1);
         if len(parts) == 2:
             element = {}
@@ -62,9 +64,11 @@ def find_cat(text, cat):
     return parser.parse(data, cat)
 
 def openurl(url):
+    sec = time.time()
     r = requests.get(url)
     if r.status_code != 200:
         raise Exception("Can't access url " + url)
+    print time.time()-sec
     return r.text
 
 def valid_pathway_id(id):

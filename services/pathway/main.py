@@ -2,6 +2,7 @@ import requests
 import json
 import services.common.vars as vars
 import services.common.tools as tools
+import time
 from threading import Thread
 
 # Used for threading when searching pathways of an organism
@@ -16,11 +17,13 @@ def pathway_set(org, return_data):
         parts = line.split(vars.delimiter, 1);
         if len(parts) == 2:
             data.add(parts[0][8:])
+    # Way to send data back to parent
     return_data.append(data);
 
 
 
 def search(args):
+    sec = time.time();
     data = {}
     # Converting the given taxon id into the KEGG organism code
     tid = ''
@@ -71,15 +74,18 @@ def search(args):
             org = orgcode
             return_data = []
 
+            # Creates a new thread to get all the pathways in an an organism
             thread = Thread(target = pathway_set, args = (org, return_data))
             thread.start()
-            # First searches all pathways
+
+            # Do a search on all pathways
             url = vars.url + 'find/pathway/' + term
             text = tools.openurl(url)
             tempdata = tools.two_col_path(text, tid)
-            # Then lists all pathway in given organism
 
+            # waits until both parts finish
             thread.join()
+            # gets the data from the thread
             data2 = return_data[0]
 
             data = []
@@ -102,5 +108,6 @@ def search(args):
         text = tools.openurl(url)
         data = tools.two_col_path(text, tid)
 
+    print time.time()-sec
     # Prints the data as a dict for Adama to return
-    print json.dumps(data)
+    #print json.dumps(data)
