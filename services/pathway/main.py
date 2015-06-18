@@ -5,59 +5,77 @@ import services.common.tools as tools
 
 def search(args):
     data = {}
-    # If a specific pathway is given
+    # Converting the given taxon id into the KEGG organism code
     tid = ''
     if 'taxon_id' in args.keys():
         tid = args['taxon_id']
         orgcode = tools.taxon_to_kegg(tid)
         if orgcode is None:
             raise Exception("Not a valid taxon id")
+
+    # If a pathway id is specified
     if 'identifier' in args.keys():
+        # Sets the default organism code to map
         org = 'map'
         if 'taxon_id' in args.keys():
             org = orgcode
-        # If the pathway given is not actually a pathway, raise an exception
+        # If the pathway given is not in the form of a KEGG pathway id, raises
+        # exception.
         if not tools.valid_pathway_id(args['identifier']):
-            raise Exception('Not a valid identifier')        
+            raise Exception('Not a valid identifier')
         id = org + args['identifier']
 
-        # If a field of the specific pathway is requested
+        # If a field of the specific pathway is requested. Can still be used,
+        # but is not displayed in any documentation.
         if 'field' in args.keys():
             url = vars.url + 'get/' + id
             text = tools.openurl(url)
-            arr = tools.find_cat(text, args['field'])
+            data = tools.find_cat(text, args['field'])
 
-            data = arr
         # No field is specified
         else:
             url = vars.url + 'list/' + id
             text = tools.openurl(url)
             data = tools.two_col_path(text, tid)
+
+    # If the user has provided a search term to search pathways for
     elif 'term' in args.keys():
         term = args['term']
+
+        # If no species is provided, just gets from the KEGG find function
         if 'taxon_id' not in args.keys():
             url = vars.url + 'find/pathway/' + term
             text = tools.openurl(url)
             data = tools.two_col_path(text, '')
+
+        # If a species is specified, has to confirm that the pathway exists in
+        # the given species
         else:
             org = orgcode
+            # First searches all pathways
             url = vars.url + 'find/pathway/' + term
             text = tools.openurl(url)
             tempdata = tools.two_col_path(text, tid)
+            # Then lists all pathway in given organism
             url2 = vars.url + 'list/pathway/' + org
             text2 = tools.openurl(url2)
-            data2 = []
+            data2 = set()
             lines = text2.split('\n')
+
+            # Creates a set of the ids of the pathways in the given organism
+
             for line in lines:
                 parts = line.split(vars.delimiter, 1);
                 if len(parts) == 2:
-                    data2.append(parts[0][8:])
+                    data2.add(parts[0][8:])
 
             data = []
+
+            # Takes the intersection of both lists
             for element in tempdata:
                 if element['KEGG_pathway_id'] in data2:
                     data.append(element)
-                        
+
 
 
 
@@ -66,10 +84,10 @@ def search(args):
         org = ''
         if 'taxon_id' in args.keys():
                 org = orgcode
-                
+
         url = vars.url + 'list/pathway/' + org
         text = tools.openurl(url)
         data = tools.two_col_path(text, tid)
-               
 
+    # Prints the data as a dict for Adama to return
     print json.dumps(data)
