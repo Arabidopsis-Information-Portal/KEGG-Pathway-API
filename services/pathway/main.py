@@ -2,6 +2,23 @@ import requests
 import json
 import services.common.vars as vars
 import services.common.tools as tools
+from threading import Thread
+
+# Used for threading when searching pathways of an organism
+def pathway_set(org, return_data):
+    url = vars.url + 'list/pathway/' + org
+    text = tools.openurl(url)
+    data = set()
+    lines = text.split('\n')
+
+    # Creates a set of the ids of the pathways in the given organism
+    for line in lines:
+        parts = line.split(vars.delimiter, 1);
+        if len(parts) == 2:
+            data.add(parts[0][8:])
+    return_data.append(data);
+
+
 
 def search(args):
     data = {}
@@ -52,22 +69,18 @@ def search(args):
         # the given species
         else:
             org = orgcode
+            return_data = []
+
+            thread = Thread(target = pathway_set, args = (org, return_data))
+            thread.start()
             # First searches all pathways
             url = vars.url + 'find/pathway/' + term
             text = tools.openurl(url)
             tempdata = tools.two_col_path(text, tid)
             # Then lists all pathway in given organism
-            url2 = vars.url + 'list/pathway/' + org
-            text2 = tools.openurl(url2)
-            data2 = set()
-            lines = text2.split('\n')
 
-            # Creates a set of the ids of the pathways in the given organism
-
-            for line in lines:
-                parts = line.split(vars.delimiter, 1);
-                if len(parts) == 2:
-                    data2.add(parts[0][8:])
+            thread.join()
+            data2 = return_data[0]
 
             data = []
 
