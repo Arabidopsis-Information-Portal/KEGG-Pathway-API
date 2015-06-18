@@ -85,7 +85,7 @@ def is_pathway(id):
     return False
 
 def taxon_to_kegg(id):
-    url = vars.url+"list/genome"
+    url = vars.url+"find/genome/" + id
     text = openurl(url)
     
     lines = text.split('\n')
