@@ -10,7 +10,7 @@ import warnings
 def run(token, args):
     warnings.simplefilter("ignore")
     for i in range(1, 10):
-        sys.stdout = open(os.devnull, "w")
+#        sys.stdout = open(os.devnull, "w")
         sec = time.time()
         m.search(args);
         sec = time.time() - sec
