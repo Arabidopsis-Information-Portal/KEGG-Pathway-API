@@ -103,4 +103,4 @@ def search(args):
         data = tools.two_col_path(text, tid)
 
     # Prints the data as a dict for Adama to return
-#    print json.dumps(data)
+    print json.dumps(data)
