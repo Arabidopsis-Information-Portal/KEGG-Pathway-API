@@ -1,6 +1,6 @@
 
 ---
-name: pathway
+name: pathway_cached
 description: KEGG Pathways
 version: 0.1
 type: query
