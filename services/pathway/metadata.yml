@@ -3,11 +3,22 @@
 name: pathway
 description: KEGG Pathways
 version: 0.1
+icon: services/common/kegg128.gif
 type: query
 main_module: services.pathway.main.py
 url: http://rest.kegg.jp
 whitelist:
   - rest.kegg.jp
+
+tags:
+    - KEGG
+    - pathway
+
+authors:
+    - name: Brian Liu
+    - email: bliu@jcvi.org
+    - sponsor_organization: JCVI
+    - sponsor_uri: http://www.jcvi.org/
 
 endpoints:
   /search:
@@ -40,3 +51,10 @@ endpoints:
         description: A search term to search the pathways with. Should only be used without an identifier.
         type: string
         required: false
+
+sources:
+  - title: KEGG API
+  - description: 'KEGG API (application programming interface) allows customization of KEGG-based analysis, such as for searching and computing biochemical pathways in cellular processes or analyzing the universe of genes in the completely sequenced genomes.'
+  - sponsor_organization_name: Kyoto Encyclopedia of Genes and Genomes
+  - sponsor_uri: http://www.kegg.jp/
+  - uri: http://www.kegg.jp/kegg/rest/keggapi.html
