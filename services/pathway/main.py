@@ -42,8 +42,9 @@ def search(args):
             raise Exception('Not a valid identifier')
         id = org + args['identifier']
 
-        # If a field of the specific pathway is requested.
-        if 'field' in args.keys() and args['field'] != 'none':
+        # If a field of the specific pathway is requested. Can still be used,
+        # but is not displayed in any documentation.
+        if 'field' in args.keys():
             url = vars.url + 'get/' + id
             text = tools.openurl(url)
             data = tools.find_cat(text, args['field'])

@@ -26,7 +26,6 @@ endpoints:
         type: string
         required: false
         enum:
-          - 'none'
           - 'name'
           - 'class'
           - 'organism'
