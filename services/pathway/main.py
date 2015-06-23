@@ -19,7 +19,6 @@ def pathway_set(org, return_data):
     return_data.append(data);
 
 
-
 def search(args):
     data = {}
     # Converting the given taxon id into the KEGG organism code
@@ -47,6 +46,10 @@ def search(args):
             url = vars.url + 'get/' + id
             text = tools.openurl(url)
             data = tools.find_cat(text, args['field'])
+
+            # Special case for returning JSON when a field is specified
+            print json.dumps(data)
+            return
 
         # No field is specified
         else:
@@ -88,9 +91,6 @@ def search(args):
                 if element['KEGG_pathway_id'] in data2:
                     data.append(element)
 
-
-
-
     # No pathway is specified. Lists all pathways in Arabidopsis
     else:
         org = ''
@@ -102,4 +102,6 @@ def search(args):
         data = tools.two_col_path(text, tid)
 
     # Prints the data as a dict for Adama to return
-    print json.dumps(data)
+    for element in data:
+        print json.dumps(element)
+        print '---'
