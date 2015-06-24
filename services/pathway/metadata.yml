@@ -3,7 +3,7 @@
 name: pathway
 description: KEGG Pathways
 version: 0.1
-icon: services/common/kegg128.gif
+icon: kegg128.gif
 type: query
 main_module: services.pathway.main.py
 url: http://rest.kegg.jp
