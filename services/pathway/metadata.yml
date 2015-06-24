@@ -16,9 +16,9 @@ tags:
 
 authors:
     - name: Brian Liu
-    - email: bliu@jcvi.org
-    - sponsor_organization: JCVI
-    - sponsor_uri: http://www.jcvi.org/
+      email: bliu@jcvi.org
+      sponsor_organization: JCVI
+      sponsor_uri: http://www.jcvi.org/
 
 endpoints:
   /search:
