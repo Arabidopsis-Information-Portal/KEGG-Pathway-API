@@ -57,4 +57,6 @@ sources:
   - description: 'KEGG API (application programming interface) allows customization of KEGG-based analysis, such as for searching and computing biochemical pathways in cellular processes or analyzing the universe of genes in the completely sequenced genomes.'
   - sponsor_organization_name: Kyoto Encyclopedia of Genes and Genomes
   - sponsor_uri: http://www.kegg.jp/
+  - provider_name: Minoru Kanehisa
+  - provider_email: kanehisa@kuicr.kyoto-u.ac.jp
   - uri: http://www.kegg.jp/kegg/rest/keggapi.html
