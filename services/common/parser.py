@@ -17,9 +17,9 @@ def parse(text):
                 parts = line.split(None, 1)
                 category = parts[0]
                 # Special case for REFERENCE
-                if category == 'REFERENCE':
-                    if 'REFERENCE' not in data.keys():
-                        data['REFERENCE'] = []
+                if category == 'reference':
+                    if 'reference' not in data.keys():
+                        data['reference'] = []
                     reference = {}
                     reference['id'] = parts[1]
                     for i in range (0, 3):
@@ -27,8 +27,8 @@ def parse(text):
                         line = split[0];
                         text = split[1];
                         parts = line.split(None, 1)
-                        reference[parts[0]] = parts[1]
-                    data['REFERENCE'].append(reference)
+                        reference[parts[0].lower()] = parts[1]
+                    data['reference'].append(reference)
                 else:
                     # Creates a new array to hold lines under that category
                     data[category] = []
@@ -39,16 +39,18 @@ def parse(text):
         line = split[0]
     data2 = {}
     for category in data:
-        print category
-        data2[category] = parse_cat(data[category], category)
+        #print category
+        key, value = parse_cat(data[category], category)
+        if key is not None:
+            data2[key] = value
     return data2
 
 def parse_cat(data, field):
     field = field.upper()
 
     if field in {"NAME", "CLASS", "ORGANISM", "KO_PATHWAY", "DESCRIPTION"}:
-        result = {field.lower(): data[0]}
-        return result
+        result = data[0]
+        return field.lower(), result
 
     if field == 'GENE':
         arr = []
@@ -56,7 +58,7 @@ def parse_cat(data, field):
             parts = line.split(None, 1)
             gene = {'locus':parts[0], field.lower():parts[1]}
             arr.append(gene)
-        return arr
+        return field.lower(), arr
 
     if field in {"COMPOUND", "MODULE"}:
         arr = []
@@ -64,7 +66,7 @@ def parse_cat(data, field):
             parts = line.split(None, 1)
             entry = {'id':parts[0], field.lower():parts[1]}
             arr.append(entry)
-        return arr
+        return field.lower(), arr
 
     if field == "DBLINKS":
         arr = []
@@ -72,5 +74,5 @@ def parse_cat(data, field):
             parts = line.split(None, 1)
             gene = {'database':parts[0][:-1], 'id':parts[1]}
             arr.append(gene)
-        return arr
-    return data
+        return field.lower(), arr
+    return None, None
