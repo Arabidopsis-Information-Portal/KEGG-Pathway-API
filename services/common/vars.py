@@ -7,4 +7,4 @@ info = 'info' # Gets information about the given database
 get = 'get'   # Returns the given database entry and its associated data
 delimiter = '\t'
 fields = {"NAME", "DESCRIPTION", "CLASS", "MODULE", "DISEASE", "DRUG", \
-"DBLINKS", "ORGANISM", "GENE", "COMPOUND", "KO_PATHWAY"}
+"DBLINKS", "ORGANISM", "GENE", "COMPOUND", "KO_PATHWAY", "REFERENCE"}

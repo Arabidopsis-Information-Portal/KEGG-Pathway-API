@@ -2,7 +2,7 @@
 ---
 name: pathway
 description: KEGG Pathways
-version: 0.1
+version: 0.2
 icon: kegg128.gif
 type: query
 main_module: services.pathway.main.py
@@ -36,17 +36,6 @@ endpoints:
         description: Field of a pathway database entry. Should only be used with an identifier.
         type: string
         required: false
-        enum:
-          - 'none'
-          - 'name'
-          - 'class'
-          - 'organism'
-          - 'ko_pathway'
-          - 'description'
-          - 'gene'
-          - 'compound'
-          - 'module'
-          - 'dblinks'
       - name: term
         description: A search term to search the pathways with. Should only be used without an identifier.
         type: string

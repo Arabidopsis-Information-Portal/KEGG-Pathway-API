@@ -37,8 +37,8 @@ def two_col_path(text, org):
         if len(parts) == 2:
             element = {}
 #            element['taxon_id'] = org
-            element['KEGG_pathway_id'] = parts[0][8:]
-            element['KEGG_pathway_name'] = parts[1]
+            element['identifier'] = parts[0][8:]
+            element['name'] = parts[1]
             data.append(element)
     return data
 
@@ -46,9 +46,11 @@ def two_col_path(text, org):
 # Splits the human readable text from the KEGG get operations. Finds the
 # category and calls a parser to convert the lines into a more useable JSON
 def find_cat(text, cat):
-    cat = cat.upper()
+    cat = cat.lower()
     if cat not in vars.fields:
         raise Exception("Not a valid field")
+    if cat == "reference":
+        return parser.parse_ref(text)
     lines = text.split('\n')
     flag = False;
     data = []
@@ -63,7 +65,7 @@ def find_cat(text, cat):
             break
         elif flag:
             data.append(line.strip())
-    return parser.parse_cat(data, cat)
+    return parser.parse_cat2(data, cat)
 
 # Opens a given url and returns the text. It will throw an exception if it
 # receives a non 200 status code
