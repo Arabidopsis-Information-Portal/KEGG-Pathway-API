@@ -52,7 +52,7 @@ def parse_fields(text):
     arr2 = []
     for field in arr:
         if field in vars.fields:
-            arr2.append field
+            arr2.append(field)
 
     data['fields'] = arr2
     return data;
