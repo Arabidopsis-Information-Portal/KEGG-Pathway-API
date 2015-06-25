@@ -47,7 +47,6 @@ def search(args):
             url = vars.url + 'get/' + id
             text = tools.openurl(url)
             data = tools.find_cat(text, args['field'])
-
             # Special case for returning JSON when a field is specified
 
 

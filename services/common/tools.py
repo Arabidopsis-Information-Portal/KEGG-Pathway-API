@@ -54,6 +54,7 @@ def find_cat(text, cat):
     lines = text.split('\n')
     flag = False;
     data = []
+    cat = cat.upper()
     for line in lines:
         parts = line.split(None, 1)
         if len(parts) == 0:
@@ -65,6 +66,7 @@ def find_cat(text, cat):
             break
         elif flag:
             data.append(line.strip())
+    cat = cat.lower()
     return parser.parse_cat2(data, cat)
 
 # Opens a given url and returns the text. It will throw an exception if it

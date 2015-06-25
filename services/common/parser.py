@@ -9,9 +9,10 @@ def parse_ref(text):
     while line != '':
         text = split[1]
         # ignores new lines and the /// that separates the results from the different queries
-        if not (line == '' or line == '///'):
-            # Special case for REFERENCE
-            if category == 'reference':
+        if not (line == '' or line == '///' or line[0] == ' '):
+            parts = line.split(None, 1)
+            category = parts[0]
+            if category == 'REFERENCE':
                 reference = {}
                 reference['id'] = parts[1]
                 for i in range (0, 3):
@@ -24,7 +25,7 @@ def parse_ref(text):
         split = text.split('\n', 1)
         line = split[0]
 
-    return reference
+    return references
 
 def parse_fields(text):
     split = text.split('\n', 1)
@@ -91,7 +92,6 @@ def parse_cat(data, field):
 
 def parse_cat2(data, field):
     field = field.lower()
-
     if field in {"name", "class", "organism", "ko_pathway", "description"}:
         result = {field.lower(): data[0]}
         return result
