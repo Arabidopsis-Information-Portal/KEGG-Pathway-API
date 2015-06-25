@@ -2,6 +2,7 @@ import requests
 import json
 import services.common.vars as vars
 import services.common.tools as tools
+import services.common.parser as parser
 from threading import Thread
 
 # Used for threading when searching pathways of an organism
@@ -48,14 +49,16 @@ def search(args):
             data = tools.find_cat(text, args['field'])
 
             # Special case for returning JSON when a field is specified
-            print json.dumps(data)
-            return
+
 
         # No field is specified
         else:
-            url = vars.url + 'list/' + id
+            url = vars.url + 'get/' + id
             text = tools.openurl(url)
-            data = tools.two_col_path(text, tid)
+            data = parser.parse(text)
+
+        print json.dumps(data)
+        return
 
     # If the user has provided a search term to search pathways for
     elif 'term' in args.keys():

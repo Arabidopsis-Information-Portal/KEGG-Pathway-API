@@ -1,2 +1,2 @@
-# Intern-Hello-World
-Sandbox for intern developers
+# KEGG Pathway API
+Provides information about Arabidopsis pathways from KEGG

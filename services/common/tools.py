@@ -63,7 +63,7 @@ def find_cat(text, cat):
             break
         elif flag:
             data.append(line.strip())
-    return parser.parse(data, cat)
+    return parser.parse_cat(data, cat)
 
 # Opens a given url and returns the text. It will throw an exception if it
 # receives a non 200 status code
