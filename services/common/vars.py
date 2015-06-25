@@ -6,5 +6,5 @@ conv = 'conv' # Converts between KEDD identifiers and outside identifiers
 info = 'info' # Gets information about the given database
 get = 'get'   # Returns the given database entry and its associated data
 delimiter = '\t'
-fields = {"NAME", "DESCRIPTION", "CLASS", "MODULE", "DISEASE", "DRUG", \
-"DBLINKS", "ORGANISM", "GENE", "COMPOUND", "KO_PATHWAY", "REFERENCE"}
+fields = {"name", "description", "class", "module", "disease", "drug", \
+"dblinks", "organism", "gene", "compound", "ko_pathway", "reference"}

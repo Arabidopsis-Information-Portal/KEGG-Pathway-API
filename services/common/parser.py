@@ -1,4 +1,5 @@
 import json
+import services.common.vars as vars
 
 
 def parse_ref(text):
@@ -48,7 +49,12 @@ def parse_fields(text):
                     data['identifier'] = parts[1].split()[0][3:]
         split = text.split('\n', 1)
         line = split[0]
-    data['fields'] = arr
+    arr2 = []
+    for field in arr:
+        if field in vars.fields:
+            arr2.append field
+
+    data['fields'] = arr2
     return data;
 
 def parse_cat(data, field):
