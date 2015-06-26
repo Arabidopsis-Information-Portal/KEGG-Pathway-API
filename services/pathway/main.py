@@ -24,6 +24,7 @@ def search(args):
     data = {}
     # Converting the given taxon id into the KEGG organism code
     tid = ''
+    orgcode = ''
     if 'taxon_id' in args.keys():
         tid = args['taxon_id']
         orgcode = tools.taxon_to_kegg(tid)
@@ -80,7 +81,7 @@ def search(args):
             # First searches all pathways
             url = vars.url + 'find/pathway/' + term
             text = tools.openurl(url)
-            tempdata = tools.two_col_path(text, tid)
+            tempdata = tools.two_col_path(text, orgcode)
             # Then lists all pathway in given organism
 
             thread.join()
@@ -101,7 +102,7 @@ def search(args):
 
         url = vars.url + 'list/pathway/' + org
         text = tools.openurl(url)
-        data = tools.two_col_path(text, tid)
+        data = tools.two_col_path(text, orgcode)
 
     # Prints the data as a dict for Adama to return
     for element in data:
