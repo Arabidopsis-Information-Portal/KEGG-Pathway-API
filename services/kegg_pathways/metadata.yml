@@ -22,7 +22,7 @@ authors:
 
 endpoints:
   /search:
-    description: 'Provides information about Arabidopsis pathways from KEGG'
+    description: 'Provides information about pathways from KEGG'
     parameters:
       - name: taxon_id
         description: The NCBI ID of the species to search for pathways in.

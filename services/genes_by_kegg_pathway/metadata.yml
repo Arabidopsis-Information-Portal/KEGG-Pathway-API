@@ -1,6 +1,6 @@
 
 ---
-name: kegg_pathways
+name: genes_by_kegg_pathway
 description: Get the genes in a KEGG pathway
 version: 0.1
 icon: kegg128.gif
@@ -23,7 +23,7 @@ authors:
 
 endpoints:
   /search:
-    description: 'Provides information about Arabidopsis pathways from KEGG'
+    description: 'Returns a list of genes in a given KEGG pathway'
     parameters:
       - name: taxon_id
         description: The NCBI ID of the species of the pathway.
