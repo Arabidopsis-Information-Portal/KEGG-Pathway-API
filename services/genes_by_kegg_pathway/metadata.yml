@@ -29,10 +29,12 @@ endpoints:
         description: The NCBI ID of the species of the pathway.
         type: string
         required: true
+        default: "3702"
       - name: pathway_id
         description: The KEGG ID of a pathway.
         type: string
         required: true
+        default: "00010"
 
 sources:
   - title: KEGG API

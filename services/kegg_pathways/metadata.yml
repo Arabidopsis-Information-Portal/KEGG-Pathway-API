@@ -28,7 +28,7 @@ endpoints:
         description: The NCBI ID of the species to search for pathways in.
         type: string
         required: false
-      - name: identifier
+      - name: pathway_id
         description: KEGG ID of a pathway.
         type: string
         required: false
