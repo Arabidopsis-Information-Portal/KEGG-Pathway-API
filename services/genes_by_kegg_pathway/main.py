@@ -34,12 +34,6 @@ def search(args):
     data = tools.find_cat(text, 'gene')
 
 
-
-
-    print json.dumps(data)
-    return
-
-
     # Prints the data as a dict for Adama to return
     for element in data:
         print json.dumps(element)
