@@ -84,17 +84,6 @@ def valid_pathway_id(id):
         return False
     return True
 
-# Checks online for if the given ID is in the list of pathways for Arabidopsis
-# Not used anymore
-def is_pathway(id):
-    text = openurl(vars.url+"list/pathway/ath")
-    lines = text.split('\n')
-    for line in lines:
-        parts = line.split(vars.delimiter, 1);
-        if parts[0][5:] == id:
-            return True
-    return False
-
 # Checks the KEGG API to convert an NCBI taxon ID into a KEGG organism code
 def taxon_to_kegg(id):
     url = vars.url+"find/genome/" + id
