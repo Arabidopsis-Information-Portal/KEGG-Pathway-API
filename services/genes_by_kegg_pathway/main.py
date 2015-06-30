@@ -24,9 +24,9 @@ def search(args):
     if 'taxon_id' in args.keys():
         org = orgcode
 
-    if not tools.valid_pathway_id(args['identifier']):
+    if not tools.valid_pathway_id(id):
         raise Exception('Not a valid identifier')
-    id = org + args['identifier']
+    id = org + id
 
 
     url = vars.url + 'get/' + id
