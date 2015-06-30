@@ -88,13 +88,6 @@ def parse_cat(data, field):
         result = data[0]
         return field, result
 
-    if field == "dblinks":
-        arr = []
-        for line in data:
-            parts = line.split(None, 1)
-            gene = {'database':parts[0][:-1], 'id':parts[1]}
-            arr.append(gene)
-        return field, arr
     return None, None
 
 def parse_cat2(data, field):
