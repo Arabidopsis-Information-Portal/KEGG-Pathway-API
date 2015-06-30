@@ -88,22 +88,6 @@ def parse_cat(data, field):
         result = data[0]
         return field, result
 
-    if field == 'gene':
-        arr = []
-        for line in data:
-            parts = line.split(None, 1)
-            gene = {'locus':parts[0], field.lower():parts[1]}
-            arr.append(gene)
-        return field, arr
-
-    if field in {"compound", "module", "disease", "drug"}:
-        arr = []
-        for line in data:
-            parts = line.split(None, 1)
-            entry = {'id':parts[0], field.lower():parts[1]}
-            arr.append(entry)
-        return field, arr
-
     if field == "dblinks":
         arr = []
         for line in data:

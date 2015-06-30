@@ -16,16 +16,16 @@ def search(args):
             raise Exception("Not a valid taxon id")
 
     # If a pathway id is specified
-    if 'identifier' in args.keys():
+    if 'pathway_id' in args.keys():
         # Sets the default organism code to map
         org = 'map'
         if 'taxon_id' in args.keys():
             org = orgcode
         # If the pathway given is not in the form of a KEGG pathway id, raises
         # exception.
-        if not tools.valid_pathway_id(args['identifier']):
+        if not tools.valid_pathway_id(args['pathway_id']):
             raise Exception('Not a valid identifier')
-        id = org + args['identifier']
+        id = org + args['pathway_id']
 
         url = vars.url + 'get/' + id
         text = tools.openurl(url)
