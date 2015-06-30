@@ -1,0 +1,43 @@
+
+---
+name: kegg_pathways
+description: KEGG Pathways
+version: 0.3
+icon: kegg128.gif
+type: query
+main_module: services.pathway.main.py
+url: http://rest.kegg.jp
+whitelist:
+  - rest.kegg.jp
+
+tags:
+    - KEGG
+    - pathway
+
+authors:
+    - name: Brian Liu
+      email: bliu@jcvi.org
+      sponsor_organization: JCVI
+      sponsor_uri: http://www.jcvi.org/
+
+endpoints:
+  /search:
+    description: 'Provides information about Arabidopsis pathways from KEGG'
+    parameters:
+      - name: taxon_id
+        description: The NCBI ID of the species to search for pathways in.
+        type: string
+        required: false
+      - name: identifier
+        description: KEGG ID of a pathway.
+        type: string
+        required: false
+
+sources:
+  - title: KEGG API
+    description: 'KEGG API (application programming interface) allows customization of KEGG-based analysis, such as for searching and computing biochemical pathways in cellular processes or analyzing the universe of genes in the completely sequenced genomes.'
+    sponsor_organization_name: Kyoto Encyclopedia of Genes and Genomes
+    sponsor_uri: http://www.kegg.jp/
+    provider_name: Minoru Kanehisa
+    provider_email: kanehisa@kuicr.kyoto-u.ac.jp
+    uri: http://www.kegg.jp/kegg/rest/keggapi.html
