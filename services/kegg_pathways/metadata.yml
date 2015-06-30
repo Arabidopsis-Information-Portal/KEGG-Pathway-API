@@ -5,7 +5,7 @@ description: KEGG Pathways
 version: 0.3
 icon: kegg128.gif
 type: query
-main_module: services.pathway.main.py
+main_module: services.kegg_pathways.main.py
 url: http://rest.kegg.jp
 whitelist:
   - rest.kegg.jp
