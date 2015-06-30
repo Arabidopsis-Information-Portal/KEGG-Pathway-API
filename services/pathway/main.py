@@ -44,18 +44,18 @@ def search(args):
         id = org + args['identifier']
 
         # If a field of the specific pathway is requested.
-        if 'field' in args.keys() and args['field'] != 'none':
-            url = vars.url + 'get/' + id
-            text = tools.openurl(url)
-            data = tools.find_cat(text, args['field'])
+        #if 'field' in args.keys() and args['field'] != 'none':
+        #    url = vars.url + 'get/' + id
+        #    text = tools.openurl(url)
+        #    data = tools.find_cat(text, args['field'])
             # Special case for returning JSON when a field is specified
 
 
         # No field is specified
-        else:
-            url = vars.url + 'get/' + id
-            text = tools.openurl(url)
-            data = parser.parse_fields(text)
+        #else:
+        url = vars.url + 'get/' + id
+        text = tools.openurl(url)
+        data = parser.parse(text)
 
         print json.dumps(data)
         return
