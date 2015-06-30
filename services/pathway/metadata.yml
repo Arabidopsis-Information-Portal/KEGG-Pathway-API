@@ -32,14 +32,6 @@ endpoints:
         description: KEGG ID of a pathway.
         type: string
         required: false
-      - name: field
-        description: Field of a pathway database entry. Should only be used with an identifier.
-        type: string
-        required: false
-      - name: term
-        description: A search term to search the pathways with. Should only be used without an identifier.
-        type: string
-        required: false
 
 sources:
   - title: KEGG API
