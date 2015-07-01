@@ -38,7 +38,10 @@ def two_col_path(text, org):
             element = {}
             element['organism'] = org
             element['identifier'] = parts[0][8:]
-            element['name'] = parts[1]
+            if org is None:
+                element['name'] = parts[1]
+            else:
+                element['name'] = parts[1].rsplit(' - ', 1)[0]
             data.append(element)
     return data
 
