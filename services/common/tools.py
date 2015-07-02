@@ -36,7 +36,7 @@ def two_col_path(text, org):
         parts = line.split(vars.delimiter, 1);
         if len(parts) == 2:
             element = {}
-            element['organism'] = org
+            #element['organism'] = org
             element['identifier'] = parts[0][8:]
             if org is None:
                 element['name'] = parts[1]

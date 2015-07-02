@@ -1,7 +1,7 @@
 
 ---
 name: kegg_pathways
-description: KEGG Pathways
+description: "Provides information about pathways from KEGG"
 version: 0.3
 icon: kegg128.gif
 type: query
@@ -22,14 +22,14 @@ authors:
 
 endpoints:
   /search:
-    description: 'Provides information about pathways from KEGG'
+    description: 'Returns information about a pathway. If no pathway is given, all pathways will be listed.'
     parameters:
       - name: taxon_id
-        description: The NCBI ID of the species to search for pathways in.
+        description: The NCBI ID of the species to filter pathways by.
         type: string
         required: false
       - name: pathway_id
-        description: KEGG ID of a pathway.
+        description: The KEGG ID of a pathway.
         type: string
         required: false
 
