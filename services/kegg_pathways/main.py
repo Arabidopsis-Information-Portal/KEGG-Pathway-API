@@ -22,7 +22,7 @@ def search(args):
         # If the pathway given is not in the form of a KEGG pathway id, raises
         # exception.
         if not tools.valid_pathway_id(args['pathway_id']):
-            raise Exception('Not a valid pathway ID')
+            raise Exception('Not a valid identifier')
 
         # Creates the full KEGG pathway ID with organism code and pathway ID
         id = org + args['pathway_id']
@@ -35,7 +35,7 @@ def search(args):
         data = parser.parse(text)
 
         # Adds the pathway ID to the returned information
-        data['pathway_id'] = args['pathway_id']
+        data['identifier'] = args['pathway_id']
 
         # Removes the organism name from the pathway
         if org != '' and 'name' in data:

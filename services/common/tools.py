@@ -37,7 +37,7 @@ def two_col_path(text, org):
         if len(parts) == 2:
             element = {}
             #element['organism'] = org
-            element['pathway_id'] = parts[0][8:]
+            element['identifier'] = parts[0][8:]
             if org is None:
                 element['name'] = parts[1]
             else:
