@@ -37,6 +37,10 @@ def search(args):
         # Adds the pathway ID to the returned information
         data['identifier'] = args['pathway_id']
 
+        # Removes the organism name from the pathway
+        if org != '' and 'name' in data:
+            data['name'] = data['name'].rsplit(' - ', 1)[0]
+
         # Prints the data for ADAMA to return to the user
         print json.dumps(data)
 
