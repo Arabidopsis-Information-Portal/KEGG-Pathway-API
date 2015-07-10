@@ -76,7 +76,9 @@ def find_cat(text, cat):
 # receives a non 200 status code
 def openurl(url):
     r = requests.get(url)
-    if r.status_code != 200:
+    if r.status_code == 404:
+        raise Exception("Not Found: Can't access url " + url)
+    elif r.status_code != 200:
         raise Exception("Can't access url " + url)
     return r.text
 
