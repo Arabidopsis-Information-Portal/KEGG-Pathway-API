@@ -33,7 +33,10 @@ def parse(text):
                         line = split[0];
                         text = split[1];
                         parts = line.split(None, 1)
-                        reference[parts[0].lower()] = parts[1]
+                        if len(parts) != 1:
+                            reference[parts[0].lower()] = parts[1]
+                        else:
+                            reference[parts[0].lower()] = ''
                     data['reference'].append(reference)
                 else:
                     # Creates a new array to hold lines under that category
