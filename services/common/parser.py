@@ -1,7 +1,4 @@
-import json
 import services.common.vars as vars
-
-
 
 def parse(text):
     data = {}
@@ -12,6 +9,7 @@ def parse(text):
         # ignores new lines and the /// that separates the results from the different queries
         if not (line == '' or line == '///'):
             # If the line is not defining a new category, adds the line to the existing category
+            category = ''
             if line[0] == ' ':
                 data[category].append(line.strip()) # removes leading and trailing whitespace
             else:    # If the line is defining a new category
@@ -30,8 +28,8 @@ def parse(text):
                         reference['id'] = parts[1]
                     for i in range (0, 3):
                         split = text.split('\n', 1)
-                        line = split[0];
-                        text = split[1];
+                        line = split[0]
+                        text = split[1]
                         parts = line.split(None, 1)
                         if len(parts) != 1:
                             reference[parts[0].lower()] = parts[1]
@@ -82,7 +80,7 @@ def parse_fields(text):
             arr2.append(field)
 
     data['fields'] = arr2
-    return data;
+    return data
 
 def parse_cat(data, field):
     field = field.lower()

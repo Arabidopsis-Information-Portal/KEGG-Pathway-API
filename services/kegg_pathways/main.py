@@ -1,4 +1,3 @@
-import requests
 import json
 import services.common.vars as vars
 import services.common.tools as tools
@@ -49,7 +48,7 @@ def search(args):
         # If an organism is given, set it to search through that organism
         org = ''
         if 'taxon_id' in args.keys():
-                org = orgcode
+            org = orgcode
 
         # Accesses the KEGG API
         url = vars.url + 'list/pathway/' + org
@@ -64,5 +63,18 @@ def search(args):
             print json.dumps(element)
             print '---'
 
+# Lists all NCBI taxon IDs
 def list(args):
-    raise Exception('Not implemented yet')
+    url = vars.url + "list/genome"
+    text = tools.openurl(url)
+
+    lines = text.split('\n')
+    for line in lines:
+        org = {}
+        parts1 = line.split('; ')
+        parts = parts1[0].split(None, 3)
+        if len(parts1) == 2 and len(parts) >= 3:
+            org['taxon_id'] = parts[-1]
+            org['organism_name'] = parts1[-1]
+            print json.dumps(org)
+            print '---'

@@ -13,7 +13,7 @@ def two_col(text, str1, str2):
         # splits each line into two parts by the tab delimiter with the
         # first part being the key and the second part being the value
         # in the returned JSON
-        parts = line.split(vars.delimiter, 1);
+        parts = line.split(vars.delimiter, 1)
         if len(parts) == 2:
             element = {}
             element[str1] = parts[0]
@@ -33,7 +33,7 @@ def two_col_path(text, org):
         # splits each line into two parts by the tab delimiter with the
         # first part being the key and the second part being the value
         # in the returned JSON
-        parts = line.split(vars.delimiter, 1);
+        parts = line.split(vars.delimiter, 1)
         if len(parts) == 2:
             element = {}
             #element['organism'] = org
@@ -55,7 +55,7 @@ def find_cat(text, cat):
     if cat == "reference":
         return parser.parse_ref(text)
     lines = text.split('\n')
-    flag = False;
+    flag = False
     data = []
     cat = cat.upper()
     for line in lines:
@@ -91,14 +91,14 @@ def valid_pathway_id(id):
 
 # Checks the KEGG API to convert an NCBI taxon ID into a KEGG organism code
 def taxon_to_kegg(id):
-    url = vars.url+"find/genome/" + id
+    url = vars.url + "find/genome/" + id
     text = openurl(url)
 
     lines = text.split('\n')
     for line in lines:
-        parts1 = line.split(';')
-        parts = parts1[0].split(None, 3);
+        parts1 = line.split('; ')
+        parts = parts1[0].split(None, 3)
         if len(parts1) == 2 and len(parts) >= 3:
             if parts[-1] == id:
                 return parts[1][:-1]
-    return None
+    return None            
