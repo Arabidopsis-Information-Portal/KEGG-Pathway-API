@@ -2,7 +2,7 @@
 ---
 name: genes_by_kegg_pathway
 description: Get the genes in a KEGG pathway
-version: 0.1
+version: 0.2
 icon: kegg128.gif
 type: query
 main_module: services.genes_by_kegg_pathway.main.py
