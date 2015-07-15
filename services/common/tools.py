@@ -101,4 +101,4 @@ def taxon_to_kegg(id):
         if len(parts1) == 2 and len(parts) >= 3:
             if parts[-1] == id:
                 return parts[1][:-1]
-    return None            
+    return None

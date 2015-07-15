@@ -1,8 +1,6 @@
-import requests
 import json
 import services.common.vars as vars
 import services.common.tools as tools
-import services.common.parser as parser
 
 
 def search(args):

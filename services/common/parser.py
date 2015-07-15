@@ -1,5 +1,19 @@
 import services.common.vars as vars
 
+
+def extract_ids(string):
+    data = {}
+    parts = string.split(' [', 1)
+    id_string = parts[1][:-1]
+    ids = id_string.split('] [')
+
+    for a in ids:
+        if 'EC:' == a[:3] and 'ec' not in data:
+            data['ec'] = a[3:]
+        elif 'KO:' == a[:3] and 'ko' not in data:
+            data['ko'] = a[3:]
+    return parts[0], data
+
 def parse(text):
     data = {}
     split = text.split('\n', 1)
@@ -101,7 +115,12 @@ def parse_cat2(data, field):
         arr = []
         for line in data:
             parts = line.split(None, 1)
-            gene = {'locus':parts[0], field.lower():parts[1]}
+            name, ids = extract_ids(parts[1])
+            gene = {'locus_id':parts[0], 'name':name}
+            if 'ec' in ids:
+                gene['ec_number'] = ids['ec']
+            if 'ko' in ids:
+                gene['kegg_orthology_id'] = ids['ko']
             arr.append(gene)
         return arr
 
