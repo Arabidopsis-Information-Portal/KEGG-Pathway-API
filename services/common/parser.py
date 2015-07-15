@@ -23,7 +23,6 @@ def parse(text):
         # ignores new lines and the /// that separates the results from the different queries
         if not (line == '' or line == '///'):
             # If the line is not defining a new category, adds the line to the existing category
-            category = ''
             if line[0] == ' ':
                 data[category].append(line.strip()) # removes leading and trailing whitespace
             else:    # If the line is defining a new category
