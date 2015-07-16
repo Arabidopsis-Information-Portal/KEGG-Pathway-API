@@ -14,7 +14,6 @@ def extract_ids(string):
             data['ec'] = a[3:]
         elif 'KO:' == a[:3] and 'ko' not in data:
             data['ko'] = a[3:]
-    print data
     return parts[0], data
 
 def parse(text):
