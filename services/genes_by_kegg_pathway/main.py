@@ -40,7 +40,7 @@ def search(args):
 
 def list(args):
 
-    if 'taxon_id' in args.keys:
+    if 'taxon_id' in args.keys():
         taxon_id = args['taxon_id']
         orgcode, taxon_name = tools.taxon_to_kegg(taxon_id)
         if orgcode is None:

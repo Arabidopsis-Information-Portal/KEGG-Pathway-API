@@ -118,7 +118,7 @@ def parse_cat2(data, field):
         for line in data:
             parts = line.split(None, 1)
             name, ids = extract_ids(parts[1])
-            gene = {'locus_id':parts[0], 'name':name}
+            gene = {'locus_id':parts[0], 'gene_name':name}
             if 'ec' in ids:
                 gene['ec_number'] = ids['ec']
             if 'ko' in ids:
