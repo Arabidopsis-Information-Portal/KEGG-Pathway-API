@@ -5,11 +5,13 @@ import services.common.tools as tools
 import services.common.parser as parser
 
 def search(args):
-    data = {}
     # Converting the given taxon id into the KEGG organism code
     orgcode = ''
+    taxon_id = None
+    taxon_name = None
     if 'taxon_id' in args.keys():
-        orgcode = tools.taxon_to_kegg(args['taxon_id'])
+        taxon_id = args['taxon_id']
+        orgcode, taxon_name = tools.taxon_to_kegg(taxon_id)
         if orgcode is None:
             raise Exception("Not a valid taxon id")
 
@@ -35,7 +37,9 @@ def search(args):
         data = parser.parse(text)
 
         # Adds the pathway ID to the returned information
-        data['identifier'] = args['pathway_id']
+        data['pathway_id'] = args['pathway_id']
+        data['taxon_id'] = taxon_id
+        data['taxon_name'] = taxon_name
 
         # Removes the organism name from the pathway
         if org != '' and 'name' in data:
@@ -56,7 +60,7 @@ def search(args):
         text = tools.openurl(url)
 
         # Parses the text received into a list of pathways
-        data = tools.two_col_path(text, orgcode)
+        data = tools.two_col_path(text, taxon_id, taxon_name)
 
         # Prints the data in JSON form with elements in the list separated by
         # three dashes

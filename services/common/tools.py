@@ -24,9 +24,7 @@ def two_col(text, str1, str2):
 # Parses text like two_col but uses set keys and also adds a key-value pair for
 # the taxon_id. If no ID is provided (empty string), then taxon_id will be set
 # to null
-def two_col_path(text, org):
-    if org == '':
-        org = None
+def two_col_path(text, taxon_id, taxon_name):
     data = []
     lines = text.split('\n')
     for line in lines:
@@ -36,12 +34,13 @@ def two_col_path(text, org):
         parts = line.split(vars.delimiter, 1)
         if len(parts) == 2:
             element = {}
-            #element['organism'] = org
-            element['identifier'] = parts[0][8:]
-            if org is None:
-                element['name'] = parts[1]
+            element['taxon_id'] = taxon_id
+            element['taxon_name'] = taxon_name
+            element['pathway_id'] = parts[0][8:]
+            if taxon_id is None:
+                element['pathway_name'] = parts[1]
             else:
-                element['name'] = parts[1].rsplit(' - ', 1)[0]
+                element['pathway_name'] = parts[1].rsplit(' - ', 1)[0]
             data.append(element)
     return data
 
@@ -100,5 +99,5 @@ def taxon_to_kegg(id):
         parts = parts1[0].split(None, 3)
         if len(parts1) == 2 and len(parts) >= 3:
             if parts[-1] == id:
-                return parts[1][:-1]
-    return None
+                return parts[1][:-1], parts1[1]
+    return None, None
