@@ -80,9 +80,8 @@ def list(args):
         # Prints the data in JSON form with elements in the list separated by
         # three dashes
         for element in data:
-            #element['url'] = vars.adama + 'bliu-dev/' + name + '_v' + version + '/search?taxon_id=' + taxon_id + '&pathway_id=' + element['pathway_id']
-            print element['pathway_id']
-            #print json.dumps(element)
+            element['url'] = vars.adama + 'bliu-dev/' + name + '_v' + version + '/search?taxon_id=' + taxon_id + '&pathway_id=' + element['pathway_id']
+            print json.dumps(element)
             print '---'
 
     else:
