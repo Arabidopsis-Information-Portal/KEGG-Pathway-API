@@ -39,6 +39,26 @@ def search(args):
         print '---'
 
 def list(args):
+    name = 'genes_by_kegg_pathway'
+    version = '0.2'
+
+    try:
+        f = open('metadata.yml', 'r')
+        flag1 = False
+        flag2 = False
+        for line in f:
+            if line[:5] == 'name:':
+                name = line.split(None, 1)[1]
+                flag1 = True
+            elif line[:5] == 'version:':
+                version = line.split(None, 1)[1]
+                flag2 = True
+            if flag1 and flag2:
+                break
+    except IOError:
+        name = 'genes_by_kegg_pathway'
+        version = '0.2'
+
 
     if 'taxon_id' in args.keys():
         taxon_id = args['taxon_id']
@@ -59,32 +79,11 @@ def list(args):
         # Prints the data in JSON form with elements in the list separated by
         # three dashes
         for element in data:
+            element['url'] = vars.adama + 'bliu-dev/' + name + '_v' + version + '/list?taxon_id=' + taxon_id + '&pathway_id=' + element['pathway_id']
             print json.dumps(element)
             print '---'
 
     else:
-        name = 'genes_by_kegg_pathway'
-        version = '0.2'
-
-        try:
-            f = open('metadata.yml', 'r')
-            flag1 = False
-            flag2 = False
-            for line in f:
-                if line[:5] == 'name:':
-                    name = line.split(None, 1)[1]
-                    flag1 = True
-                elif line[:5] == 'version:':
-                    version = line.split(None, 1)[1]
-                    flag2 = True
-                if flag1 and flag2:
-                    break
-        except IOError:
-            name = 'genes_by_kegg_pathway'
-            version = '0.2'
-
-
-
         url = vars.url + "list/genome"
         r = requests.get(url, stream=True)
 
@@ -94,7 +93,7 @@ def list(args):
             parts = parts1[0].split(None, 3)
             if len(parts1) == 2 and len(parts) >= 3:
                 org['taxon_id'] = parts[-1]
-                org['url'] = vars.adama + 'bliu-dev/' + name + '_v' + version + '/search?taxon_id=' + parts[-1]
+                org['url'] = vars.adama + 'bliu-dev/' + name + '_v' + version + '/list?taxon_id=' + parts[-1]
                 org['taxon_name'] = parts1[-1]
                 print json.dumps(org)
                 print '---'
