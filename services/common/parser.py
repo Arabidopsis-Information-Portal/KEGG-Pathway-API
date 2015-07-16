@@ -8,7 +8,6 @@ def extract_ids(string):
     while id_string[:3] != 'KO:' and id_string[:3] != 'EC:':
         id_string = id_string.split(' [', 1)[1]
     ids = id_string.split('] [')
-    print ids
     for a in ids:
         if 'EC:' == a[:3] and 'ec' not in data:
             data['ec'] = a[3:]
