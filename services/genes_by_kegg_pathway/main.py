@@ -62,8 +62,7 @@ def list(args):
 
 
     if 'taxon_id' in args.keys():
-        taxon_id = args['taxon_id']
-        raise Exception(taxon_id)
+        taxon_id = args['taxon_id'][0]
         orgcode, taxon_name = tools.taxon_to_kegg(taxon_id)
         if orgcode is None:
             raise Exception("Not a valid taxon id")
