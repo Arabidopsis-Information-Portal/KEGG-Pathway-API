@@ -44,6 +44,7 @@ def list(args):
 
     try:
         f = open('metadata.yml', 'r')
+        raise Exception("ghiorwjwiowg")
         flag1 = False
         flag2 = False
         for line in f:
@@ -55,7 +56,7 @@ def list(args):
                 flag2 = True
             if flag1 and flag2:
                 break
-        raise Exception("ghiorwjwiowg")
+
     except IOError:
         name = 'genes_by_kegg_pathway'
         version = '0.2'
