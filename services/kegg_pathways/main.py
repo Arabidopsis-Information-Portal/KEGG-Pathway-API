@@ -1,4 +1,5 @@
 import json
+import requests
 import services.common.vars as vars
 import services.common.tools as tools
 import services.common.parser as parser
@@ -66,10 +67,9 @@ def search(args):
 # Lists all NCBI taxon IDs
 def list(args):
     url = vars.url + "list/genome"
-    text = tools.openurl(url)
+    r = requests.get(url, stream=True)
 
-    lines = text.split('\n')
-    for line in lines:
+    for line in r.iter_lines():
         org = {}
         parts1 = line.split('; ')
         parts = parts1[0].split(None, 3)
