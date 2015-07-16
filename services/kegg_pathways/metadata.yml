@@ -25,7 +25,7 @@ endpoints:
     description: 'Returns information about a pathway. If no pathway is given, all pathways will be listed.'
     parameters:
       - name: taxon_id
-        description: The NCBI ID of the species to filter pathways by (e.g.3702).
+        description: The NCBI ID of the species to filter pathways by (e.g. 3702).
         type: string
         required: false
       - name: pathway_id
