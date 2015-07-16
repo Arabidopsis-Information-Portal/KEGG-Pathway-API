@@ -44,7 +44,6 @@ def list(args):
 
     try:
         f = open('metadata.yml', 'r')
-        raise Exception("ghiorwjwiowg")
         flag1 = False
         flag2 = False
         for line in f:
@@ -81,7 +80,7 @@ def list(args):
         # Prints the data in JSON form with elements in the list separated by
         # three dashes
         for element in data:
-            element['url'] = vars.adama + 'bliu-dev/' + name + '_v' + version + '/search?taxon_id=' + taxon_id + '&pathway_id=' + element['pathway_id']
+            #element['url'] = vars.adama + 'bliu-dev/' + name + '_v' + version + '/search?taxon_id=' + taxon_id + '&pathway_id=' + element['pathway_id']
             print element['pathway_id']
             #print json.dumps(element)
             print '---'
