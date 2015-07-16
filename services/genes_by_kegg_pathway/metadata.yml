@@ -41,6 +41,7 @@ endpoints:
       - name: taxon_id
         description: The NCBI ID of the species to list the pathways of.
         type: string
+        required: false
 
 sources:
   - title: KEGG API
