@@ -35,6 +35,12 @@ endpoints:
         type: string
         required: true
         default: "00010"
+  /list:
+    description: 'Returns a list of possible arguments of the search operation. Calling list with no fields returns a list of taxon IDs that KEGG has in its database. Note that KEGG does not have pathway data on all of these taxons. Calling list with a taxon ID will return a list of pathways in the taxon. This functionality is duplicated by the search endpoint for the kegg_pathways API.'
+      parameters:
+        - name: taxon_id
+          description: The NCBI ID of the species to list the pathways of.
+          type: string
 
 sources:
   - title: KEGG API

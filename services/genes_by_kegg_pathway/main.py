@@ -1,4 +1,5 @@
 import json
+import requests
 import services.common.vars as vars
 import services.common.tools as tools
 
@@ -36,3 +37,64 @@ def search(args):
     for element in data:
         print json.dumps(element)
         print '---'
+
+def list(args):
+
+    if 'taxon_id' in args.keys:
+        taxon_id = args['taxon_id']
+        orgcode, taxon_name = tools.taxon_to_kegg(taxon_id)
+        if orgcode is None:
+            raise Exception("Not a valid taxon id")
+        org = ''
+        if 'taxon_id' in args.keys():
+            org = orgcode
+
+        # Accesses the KEGG API
+        url = vars.url + 'list/pathway/' + org
+        text = tools.openurl(url)
+
+        # Parses the text received into a list of pathways
+        data = tools.two_col_path(text, taxon_id, taxon_name)
+
+        # Prints the data in JSON form with elements in the list separated by
+        # three dashes
+        for element in data:
+            print json.dumps(element)
+            print '---'
+
+    else:
+        name = 'genes_by_kegg_pathway'
+        version = '0.2'
+
+        try:
+            f = open('metadata.yml', 'r')
+            flag1 = False
+            flag2 = False
+            for line in f:
+                if line[:5] == 'name:':
+                    name = line.split(None, 1)[1]
+                    flag1 = True
+                elif line[:5] == 'version:':
+                    version = line.split(None, 1)[1]
+                    flag2 = True
+                if flag1 and flag2:
+                    break
+        except IOError:
+            name = 'genes_by_kegg_pathway'
+            version = '0.2'
+
+
+
+        url = vars.url + "list/genome"
+        r = requests.get(url, stream=True)
+
+        for line in r.iter_lines():
+            org = {}
+            parts1 = line.split('; ')
+            parts = parts1[0].split(None, 3)
+            if len(parts1) == 2 and len(parts) >= 3:
+                org['taxon_id'] = parts[-1]
+                org['url'] = vars.adama + 'bliu-dev/' + name + '_v' + version + '/search?taxon_id=' + parts[-1]
+                org['taxon_name'] = parts1[-1]
+                print json.dumps(org)
+                print '---'
