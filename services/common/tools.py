@@ -92,7 +92,7 @@ def valid_pathway_id(id):
 def taxon_to_kegg(id):
     url = vars.url + "find/genome/" + id
     text = openurl(url)
-
+    raise Exception('geoiuwgj')
     lines = text.split('\n')
     for line in lines:
         parts1 = line.split('; ')
