@@ -7,11 +7,11 @@ import services.common.tools as tools
 def search(args):
     data = {}
     # Converting the given taxon id into the KEGG organism code
-    tid = ''
+    taxon_id = ''
     orgcode = ''
     if 'taxon_id' in args.keys():
-        tid = args['taxon_id']
-        orgcode = tools.taxon_to_kegg(tid)
+        taxon_id = args['taxon_id']
+        orgcode, taxon_name = tools.taxon_to_kegg(taxon_id)
         if orgcode is None:
             raise Exception("Not a valid taxon id")
 
@@ -35,6 +35,9 @@ def search(args):
 
     # Prints the data as a dict for Adama to return
     for element in data:
+        element['taxon_id'] = taxon_id
+        element['taxon_name'] = taxon_name
+        element['pathway_id'] = args['pathway_id']
         print json.dumps(element)
         print '---'
 
