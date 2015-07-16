@@ -70,20 +70,27 @@ def search(args):
 
 # Lists all NCBI taxon IDs
 def list(args):
+
     name = 'kegg_pathways'
     version = '0.3'
-    f = open('metadata.yml', 'r')
-    flag1 = False
-    flag2 = False
-    for line in f:
-        if line[:5] == 'name:':
-            name = line.split(None, 1)[1]
-            flag1 = True
-        elif line[:5] == 'version:':
-            version = line.split(None, 1)[1]
-            flag2 = True
-        if flag1 and flag2:
-            break
+
+    try:
+        f = open('metadata.yml', 'r')
+        flag1 = False
+        flag2 = False
+        for line in f:
+            if line[:5] == 'name:':
+                name = line.split(None, 1)[1]
+                flag1 = True
+            elif line[:5] == 'version:':
+                version = line.split(None, 1)[1]
+                flag2 = True
+            if flag1 and flag2:
+                break
+    except IOError:
+        name = 'kegg_pathways'
+        version = '0.3'
+
 
 
     url = vars.url + "list/genome"
