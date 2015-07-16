@@ -32,6 +32,8 @@ endpoints:
         description: The KEGG ID of a pathway.
         type: string
         required: false
+  /list:
+    description: 'Returns a list of the taxon IDs that KEGG has data on. This operation will be slow due to the number oforganisms that KEGG has information about. Note that KEGG does not have pathway information on all of the these organisms.'
 
 sources:
   - title: KEGG API

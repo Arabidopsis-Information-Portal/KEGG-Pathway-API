@@ -66,6 +66,22 @@ def search(args):
 
 # Lists all NCBI taxon IDs
 def list(args):
+    name = 'kegg_pathways'
+    version = '0.3'
+    f = open('metadata.yml', 'r')
+    flag1 = False
+    flag2 = False
+    for line in f:
+        if line[:5] == 'name:':
+            name = line.split(None, 1)[1]
+            flag1 = True
+        elif line[:5] == 'version:':
+            version = line.split(None, 1)[1]
+            flag2 = True
+        if flag1 and flag2:
+            break
+
+
     url = vars.url + "list/genome"
     r = requests.get(url, stream=True)
 
@@ -75,6 +91,7 @@ def list(args):
         parts = parts1[0].split(None, 3)
         if len(parts1) == 2 and len(parts) >= 3:
             org['taxon_id'] = parts[-1]
-            org['organism_name'] = parts1[-1]
+            org['url'] = vars.adama + 'bliu-dev/' + name + '_v' + version + '/search?taxon_id=' + parts[-1]
+            org['taxon_name'] = parts1[-1]
             print json.dumps(org)
             print '---'
