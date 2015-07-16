@@ -55,6 +55,7 @@ def list(args):
                 flag2 = True
             if flag1 and flag2:
                 break
+        raise Exception("ghiorwjwiowg")
     except IOError:
         name = 'genes_by_kegg_pathway'
         version = '0.2'
@@ -80,7 +81,8 @@ def list(args):
         # three dashes
         for element in data:
             element['url'] = vars.adama + 'bliu-dev/' + name + '_v' + version + '/search?taxon_id=' + taxon_id + '&pathway_id=' + element['pathway_id']
-            print json.dumps(element)
+            print element['pathway_id']
+            #print json.dumps(element)
             print '---'
 
     else:
