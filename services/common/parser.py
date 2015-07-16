@@ -5,13 +5,16 @@ def extract_ids(string):
     data = {}
     parts = string.split(' [', 1)
     id_string = parts[1][:-1]
+    while id_string[:3] != 'KO:' and id_string[:3] != 'EC:':
+        id_string = id_string.split(' [', 1)[1]
     ids = id_string.split('] [')
-
+    print ids
     for a in ids:
         if 'EC:' == a[:3] and 'ec' not in data:
             data['ec'] = a[3:]
         elif 'KO:' == a[:3] and 'ko' not in data:
             data['ko'] = a[3:]
+    print data
     return parts[0], data
 
 def parse(text):
