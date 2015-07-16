@@ -25,15 +25,15 @@ endpoints:
     description: 'Returns information about a pathway. If no pathway is given, all pathways will be listed.'
     parameters:
       - name: taxon_id
-        description: The NCBI ID of the species to filter pathways by.
+        description: The NCBI ID of the species to filter pathways by (e.g.3702).
         type: string
         required: false
       - name: pathway_id
-        description: The KEGG ID of a pathway.
+        description: The KEGG ID of a pathway (e.g. 00010).
         type: string
         required: false
   /list:
-    description: 'Returns a list of the taxon IDs that KEGG has data on. This operation will be slow due to the number oforganisms that KEGG has information about. Note that KEGG does not have pathway information on all of the these organisms.'
+    description: 'Returns a list of the taxon IDs that KEGG has data on. This operation will take several seconds. Note that KEGG does not have pathway information on all of the these organisms.'
 
 sources:
   - title: KEGG API

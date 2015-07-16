@@ -2,7 +2,7 @@
 ---
 name: genes_by_kegg_pathway
 description: Get the genes in a KEGG pathway
-version: 0.2
+version: 0.3
 icon: kegg128.gif
 type: query
 main_module: services.genes_by_kegg_pathway.main.py
@@ -26,20 +26,20 @@ endpoints:
     description: 'Returns a list of genes in a given KEGG pathway. Both taxon ID and pathway ID are required because KEGG does not have gene information about generic pathways'
     parameters:
       - name: taxon_id
-        description: The NCBI ID of the species of the pathway.
+        description: The NCBI ID of the species of the pathway (e.g.3702).
         type: string
         required: true
         default: "3702"
       - name: pathway_id
-        description: The KEGG ID of a pathway.
+        description: The KEGG ID of a pathway (e.g. 00010).
         type: string
         required: true
         default: "00010"
   /list:
-    description: 'Returns a list of possible arguments of the search operation. Calling list with no fields returns a list of taxon IDs that KEGG has in its database. Note that KEGG does not have pathway data on all of these taxons. Calling list with a taxon ID will return a list of pathways in the taxon. This functionality is duplicated by the search endpoint for the kegg_pathways API.'
+    description: 'Returns a list of possible arguments of the search operation. Calling list with no fields returns a list of taxon IDs that KEGG has in its database. This operation will take several seconds. Note that KEGG does not have pathway data on all of these taxons. Calling list with a taxon ID will return a list of pathways in the taxon. This functionality is duplicated by the search endpoint of the kegg_pathways API.'
     parameters:
       - name: taxon_id
-        description: The NCBI ID of the species to list the pathways of.
+        description: The NCBI ID of the species to list the pathways of (e.g.3702).
         type: string
         required: false
 
