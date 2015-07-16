@@ -63,6 +63,7 @@ def list(args):
 
     if 'taxon_id' in args.keys():
         taxon_id = args['taxon_id']
+        raise Exception('before')
         orgcode, taxon_name = tools.taxon_to_kegg(taxon_id)
         if orgcode is None:
             raise Exception("Not a valid taxon id")
@@ -70,11 +71,10 @@ def list(args):
         if 'taxon_id' in args.keys():
             org = orgcode
 
-        raise Exception('before')
+
         # Accesses the KEGG API
         url = vars.url + 'list/pathway/' + org
         text = tools.openurl(url)
-        raise Exception('after')
         # Parses the text received into a list of pathways
         data = tools.two_col_path(text, taxon_id, taxon_name)
 
