@@ -2,6 +2,17 @@ import json
 import requests
 import services.common.vars as vars
 import services.common.tools as tools
+import re
+from threading import Thread
+
+
+def convert_to_locus(element):
+    url = vars.url + 'get/ath:' + element['locus_id']
+    text = tools.openurl(url)
+    links = tools.find_cat(text, 'dblinks')
+    for dblink in links:
+        if dblink['database'] == 'TAIR':
+            element['locus_id'] = dblink['id']
 
 
 def search(args):
@@ -32,6 +43,18 @@ def search(args):
     text = tools.openurl(url)
     data = tools.find_cat(text, 'gene')
 
+    p = re.compile('^AT[1-5CM]G[0-9]{5,5}$')
+    thread_list = []
+
+    for element in data:
+        if p.match(element['locus_id']) is None:
+            thread = Thread(target = convert_to_locus, args = (element,))
+            thread.start()
+            thread_list.append(thread)
+
+
+    for thread in thread_list:
+        thread.join()
 
     # Prints the data as a dict for Adama to return
     for element in data:
