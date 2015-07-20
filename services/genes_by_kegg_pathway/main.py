@@ -47,11 +47,13 @@ def search(args):
         path_id = orgcode + path_id
 
 
-        raise Exception('here')
+
 
         # Gets the information from KEGG
         url = vars.url + 'get/' + path_id
         text = tools.openurl(url)
+
+        raise Exception('here')
 
         # Parses the data received back, and creates an array that stores all teh genes.
         data = tools.find_cat(text, 'gene')
