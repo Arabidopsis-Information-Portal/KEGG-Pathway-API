@@ -82,8 +82,7 @@ def search(args):
                 thread.join()
 
 
-        raise Exception('here')
-
+        
         # Prints the data as JSON for Adama to return
         for element in data:
             # Adds additional fields before printing.
@@ -92,7 +91,7 @@ def search(args):
             element['pathway_id'] = args['pathway_id']
             print json.dumps(element)
             print '---'
-
+            return
     else:
         path_id = args['pathway_id']
 
