@@ -82,16 +82,17 @@ def search(args):
                 thread.join()
 
 
-        
+
+
         # Prints the data as JSON for Adama to return
         for element in data:
             # Adds additional fields before printing.
             element['taxon_id'] = taxon_id
             element['taxon_name'] = taxon_name
             element['pathway_id'] = args['pathway_id']
-            print json.dumps(element)
-            print '---'
-            return
+            #print json.dumps(element)
+            #print '---'
+        raise Exception('here')    
     else:
         path_id = args['pathway_id']
 
