@@ -124,6 +124,17 @@ def parse_cat2(data, field):
             arr.append(gene)
         return arr
 
+    if field == 'orthology':
+        arr = []
+        for line in data:
+            parts = line.split(None, 1)
+            name, ids = extract_ids(parts[1])
+            gene = {'kegg_orthology_id':parts[0], 'gene_name':name}
+            if 'ec' in ids:
+                gene['ec_number'] = ids['ec']
+            arr.append(gene)
+        return arr
+
     if field in {"compound", "module", "disease", "drug"}:
         arr = []
         for line in data:
