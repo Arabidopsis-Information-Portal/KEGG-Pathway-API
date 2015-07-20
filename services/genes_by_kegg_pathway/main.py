@@ -21,7 +21,7 @@ def search(args):
     # Checks if the required arguments are in the arguments received. If they
     # are not, raise an exception to tell the user.
 
-    raise Exception('here')
+
     if 'pathway_id' not in args.keys():
         raise Exception('No argument given for "pathway_id"')
 
@@ -31,6 +31,7 @@ def search(args):
         # Gets the required arguments
         taxon_id = args['taxon_id']
         path_id = args['pathway_id']
+
 
         # Uses the taxon ID to get the KEGG organism code and the name of the taxon
         orgcode, taxon_name = tools.taxon_to_kegg(taxon_id)
@@ -44,6 +45,9 @@ def search(args):
 
         # Creates the full pathway ID to access KEGG with
         path_id = orgcode + path_id
+
+
+        raise Exception('here')
 
         # Gets the information from KEGG
         url = vars.url + 'get/' + path_id
