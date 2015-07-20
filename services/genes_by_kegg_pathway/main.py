@@ -93,9 +93,9 @@ def search(args):
             #print json.dumps(element)
             #print '---'
 
-        raise Exception('here')
+        #raise Exception('here')
         print json.dumps({'hello':'test'})
-
+        return
     else:
         path_id = args['pathway_id']
 
