@@ -21,7 +21,7 @@ def search(args):
     # Checks if the required arguments are in the arguments received. If they
     # are not, raise an exception to tell the user.
 
-
+    raise Exception('here')
     if 'pathway_id' not in args.keys():
         raise Exception('No argument given for "pathway_id"')
 
@@ -91,7 +91,7 @@ def search(args):
         url = vars.url + 'get/ko' + path_id
         text = tools.openurl(url)
 
-        raise Exception('here')
+
 
         # Parses the data received back, and creates an array that stores all the genes.
         data = tools.find_cat(text, 'orthology')
