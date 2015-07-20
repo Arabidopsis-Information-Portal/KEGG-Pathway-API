@@ -88,21 +88,8 @@ def search(args):
     else:
         path_id = args['pathway_id']
 
-        # Uses the taxon ID to get the KEGG organism code and the name of the taxon
-        orgcode, taxon_name = tools.taxon_to_kegg(taxon_id)
-        # If the conversion was unsuccessful, raise an exception to notify the user
-        if orgcode is None:
-            raise Exception("Not a valid taxon id")
-
-        # If the pathway_id is in an invalid format, raises an exception
-        if not tools.valid_pathway_id(path_id):
-            raise Exception('Not a valid identifier')
-
-        # Creates the full pathway ID to access KEGG with
-        path_id = orgcode + path_id
-
         # Gets the information from KEGG
-        url = vars.url + 'get/' + path_id
+        url = vars.url + 'get/ko' + path_id
         text = tools.openurl(url)
 
         # Parses the data received back, and creates an array that stores all teh genes.
