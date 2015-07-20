@@ -93,6 +93,7 @@ def search(args):
             #print json.dumps(element)
             #print '---'
 
+        raise Exception('here')
         print json.dumps({'hello':'test'})
 
     else:
