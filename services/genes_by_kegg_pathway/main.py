@@ -76,7 +76,7 @@ def search(args):
                     thread = Thread(target = convert_to_locus, args = (element,))
                     thread.start()
                     thread_list.append(thread)
-            raise Exception('here')
+
             # Joins with all threads so it will wait for all threads to finish
             for thread in thread_list:
                 thread.join()
