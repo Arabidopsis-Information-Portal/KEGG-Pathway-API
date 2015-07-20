@@ -3,7 +3,10 @@ import services.common.vars as vars
 
 def extract_ids(string):
     data = {}
+    print string
     parts = string.split(' [', 1)
+    if len(parts) == 1:
+        return string, {}
     id_string = parts[1][:-1]
     while id_string[:3] != 'KO:' and id_string[:3] != 'EC:':
         id_string = id_string.split(' [', 1)[1]

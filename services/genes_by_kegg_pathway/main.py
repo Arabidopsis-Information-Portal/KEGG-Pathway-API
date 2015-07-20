@@ -93,13 +93,14 @@ def search(args):
         text = tools.openurl(url)
 
         # Parses the data received back, and creates an array that stores all teh genes.
-        data = tools.find_cat(text, 'gene')
+        data = tools.find_cat(text, 'orthology')
 
         for element in data:
             # Adds additional fields before printing.
             element['taxon_id'] = None
             element['taxon_name'] = None
             element['pathway_id'] = args['pathway_id']
+            element['locus_id'] = None
             print json.dumps(element)
             print '---'
 
