@@ -81,6 +81,9 @@ def search(args):
             for thread in thread_list:
                 thread.join()
 
+
+        raise Exception('here')
+
         # Prints the data as JSON for Adama to return
         for element in data:
             # Adds additional fields before printing.
