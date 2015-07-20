@@ -90,9 +90,11 @@ def search(args):
             element['taxon_id'] = taxon_id
             element['taxon_name'] = taxon_name
             element['pathway_id'] = args['pathway_id']
-            #print json.dumps(element)
-            #print '---'
-        raise Exception('here')    
+            print json.dumps(element)
+            print '---'
+
+        raise Exception('here')
+
     else:
         path_id = args['pathway_id']
 
