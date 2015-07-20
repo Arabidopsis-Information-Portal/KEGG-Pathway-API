@@ -84,7 +84,6 @@ def search(args):
             print json.dumps(element)
             print '---'
 
-
     else:
         path_id = args['pathway_id']
 
@@ -92,7 +91,9 @@ def search(args):
         url = vars.url + 'get/ko' + path_id
         text = tools.openurl(url)
 
-        # Parses the data received back, and creates an array that stores all teh genes.
+        raise Exception('here')
+
+        # Parses the data received back, and creates an array that stores all the genes.
         data = tools.find_cat(text, 'orthology')
 
         for element in data:
