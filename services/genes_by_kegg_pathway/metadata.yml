@@ -28,7 +28,7 @@ endpoints:
       - name: taxon_id
         description: The NCBI ID of the species of the pathway (e.g. 3702).
         type: string
-        required: true
+        required: false
         default: "3702"
       - name: pathway_id
         description: The KEGG ID of a pathway (e.g. 00010).
