@@ -21,17 +21,13 @@ def search(args):
     # Checks if the required arguments are in the arguments received. If they
     # are not, raise an exception to tell the user.
 
-
     if 'pathway_id' not in args.keys():
         raise Exception('No argument given for "pathway_id"')
-
-
 
     if 'taxon_id' in args.keys():
         # Gets the required arguments
         taxon_id = args['taxon_id']
         path_id = args['pathway_id']
-
 
         # Uses the taxon ID to get the KEGG organism code and the name of the taxon
         orgcode, taxon_name = tools.taxon_to_kegg(taxon_id)
@@ -46,14 +42,9 @@ def search(args):
         # Creates the full pathway ID to access KEGG with
         path_id = orgcode + path_id
 
-
-
-
         # Gets the information from KEGG
         url = vars.url + 'get/' + path_id
         text = tools.openurl(url)
-
-
 
         # Parses the data received back, and creates an array that stores all teh genes.
         data = tools.find_cat(text, 'gene')
@@ -81,29 +72,21 @@ def search(args):
             for thread in thread_list:
                 thread.join()
 
-
-
-
         # Prints the data as JSON for Adama to return
         for element in data:
             # Adds additional fields before printing.
             element['taxon_id'] = taxon_id
             element['taxon_name'] = taxon_name
             element['pathway_id'] = args['pathway_id']
-            #print json.dumps(element)
-            #print '---'
+            print json.dumps(element)
+            print '---'
 
-        #raise Exception('here')
-        print json.dumps({'hello':'test'})
-        return
     else:
         path_id = args['pathway_id']
 
         # Gets the information from KEGG
         url = vars.url + 'get/ko' + path_id
         text = tools.openurl(url)
-
-
 
         # Parses the data received back, and creates an array that stores all the genes.
         data = tools.find_cat(text, 'orthology')
@@ -116,6 +99,7 @@ def search(args):
             element['locus_id'] = None
             print json.dumps(element)
             print '---'
+
 
 def list(args):
 
