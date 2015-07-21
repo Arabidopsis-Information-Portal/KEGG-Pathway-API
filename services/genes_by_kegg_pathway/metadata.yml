@@ -23,7 +23,7 @@ authors:
 
 endpoints:
   /search:
-    description: 'Returns a list of genes in a given KEGG pathway. Both taxon ID and pathway ID are required because KEGG does not have gene information about generic pathways'
+    description: 'Returns a list of genes in a given KEGG pathway. If no taxon ID is given, a list of the related KEGG orthology genes will be returned'
     parameters:
       - name: taxon_id
         description: The NCBI ID of the species of the pathway (e.g. 3702).
