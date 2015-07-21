@@ -82,7 +82,23 @@ def search(args):
             print '---'
 
     else:
-        raise Exception('No taxon ID given')
+        path_id = args['pathway_id']
+
+        # Gets the information from KEGG
+        url = vars.url + 'get/ko' + path_id
+        text = tools.openurl(url)
+
+        # Parses the data received back, and creates an array that stores all the genes.
+        data = tools.find_cat(text, 'orthology')
+
+        for element in data:
+            # Adds additional fields before printing.
+            element['taxon_id'] = None
+            element['taxon_name'] = None
+            element['pathway_id'] = args['pathway_id']
+            element['locus_id'] = None
+            print json.dumps(element)
+            print '---'
 
 
 def list(args):
