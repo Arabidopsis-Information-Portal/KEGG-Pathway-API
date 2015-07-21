@@ -4,6 +4,8 @@ import services.common.vars as vars
 def extract_ids(string):
     data = {}
     parts = string.split(' [', 1)
+    if len(parts) < 2:
+        return string, {}
     id_string = parts[1][:-1]
     while id_string[:3] != 'KO:' and id_string[:3] != 'EC:':
         id_string = id_string.split(' [', 1)[1]
@@ -130,6 +132,17 @@ def parse_cat2(data, field):
             parts = line.split(None, 1)
             entry = {'id':parts[0], field.lower():parts[1]}
             arr.append(entry)
+        return arr
+
+    if field == 'orthology':
+        arr = []
+        for line in data:
+            parts = line.split(None, 1)
+            name, ids = extract_ids(parts[1])
+            gene = {'kegg_orthology_id':parts[0], 'gene_name':name}
+            if 'ec' in ids:
+                gene['ec_number'] = ids['ec']
+            arr.append(gene)
         return arr
 
     if field == "dblinks":
